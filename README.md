@@ -36,7 +36,7 @@ Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可
 
 ```bash
 python3 tools/bootstrap.py
-./gradlew --no-daemon build --console=plain
+./gradlew --no-daemon :build --console=plain
 python3 tools/prepare_release.py
 ```
 

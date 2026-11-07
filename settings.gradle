@@ -1,4 +1,18 @@
-pluginManagement { repositories { maven { url = 'https://maven.cleanroommc.com' }; gradlePluginPortal() } }
+pluginManagement {
+    repositories {
+        // Maven Central's official Google mirror avoids shared-runner 429 responses.
+        maven { url = 'https://maven-central.storage-download.googleapis.com/maven2/' }
+        maven { url = 'https://maven.cleanroommc.com' }
+        gradlePluginPortal()
+    }
+}
 plugins { id 'com.cleanroommc.cleanroomgradle.settings' version '0.22.0' }
+// CleanroomGradle adds Maven Central to every project before evaluation.
+// Update that existing repository before any module resolves its dependencies.
+gradle.lifecycle.beforeProject { project ->
+    project.repositories.mavenCentral {
+        url = 'https://maven-central.storage-download.googleapis.com/maven2/'
+    }
+}
 rootProject.name='ftb-quests-legacy'
 include ':ftb-quests', ':ftb-library', ':ftb-utilities', ':media-api', ':mcp-server'
