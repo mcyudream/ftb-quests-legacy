@@ -1,0 +1,15 @@
+{
+  "direct_commit_only_chinese_events_and_unicode_backspace": true,
+  "item_search_铁锭": true,
+  "item_search_tieding": true,
+  "item_search_td": true,
+  "item_search_iron_ingot": true,
+  "item_search_@minecraft": true,
+  "item_pinyin_selection_returns_actual_stack": true,
+  "inline_search_keyboard_queue_chinese_without_external_window": true,
+  "ponder_initials_find_localized_scene_title": true,
+  "ponder_full_pinyin_selects_exact_scene": true,
+  "inline_multiline_unicode_undo_redo_and_title": true,
+  "chinese_network_disk_roundtrip_and_unknown_fields": true,
+  "native_ime_engine_keystrokes_not_automated": true
+}

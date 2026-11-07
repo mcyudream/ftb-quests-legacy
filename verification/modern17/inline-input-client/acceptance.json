@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "cleanroom": "0.4.0",
+  "detail": "Inline Chinese keyboard-queue commits, supplementary Han undo/redo, no F4 or 中 editor popup; item/Ponder pinyin selection; Chinese title/body network and disk roundtrip",
+  "video": false,
+  "ponder": true,
+  "zs": false
+}

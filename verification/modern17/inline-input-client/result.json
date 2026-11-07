@@ -1,0 +1,17 @@
+{
+  "cleanroom": "0.4.0",
+  "side": "client",
+  "exit": 0,
+  "loader_version_seen": true,
+  "server_ready": false,
+  "timed_out": false,
+  "gameplay_report": {
+    "result": "PASS",
+    "cleanroom": "0.4.0",
+    "detail": "Inline Chinese keyboard-queue commits, supplementary Han undo/redo, no F4 or \u4e2d editor popup; item/Ponder pinyin selection; Chinese title/body network and disk roundtrip",
+    "video": false,
+    "ponder": true,
+    "zs": false
+  },
+  "result": "FUNCTIONAL_PASS"
+}
