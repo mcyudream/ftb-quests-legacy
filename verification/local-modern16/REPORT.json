@@ -1,0 +1,336 @@
+{
+  "generated_utc": "2026-11-07T07:11:46.937792+00:00",
+  "release": "Quests modern.16 / Library modern.4",
+  "minecraft": "1.12.2",
+  "cleanroom": "0.4.0",
+  "java": "25.0.5+8",
+  "platform": "Linux x86_64",
+  "installation_jars_sha256": {
+    "FTBQuests-1202.10.0-modern.16.jar": "7552217d99242b8db0c1ef8f8d4cae65c2a7e071d23ea0256be9d3bea34fc5e5",
+    "FTB-Library-NovaEng-5.5.4-modern.4.jar": "bc5fc4cf156398c6c0ce8c17a9c5f918dcfb03dddf194d7f63c154419fa61376",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "4c26d02b108bc859541238665800d78b72373287643ef2e98d8dbc7a61fedb52",
+    "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
+    "MediaAPI-1.0.4.jar": "2b32e8d3adae9fdb3cab7651979f13c3326388e5f204e5e9794aa59a53974dc7"
+  },
+  "embedded_runtime": {
+    "name": "WATERMeDIA 1.3.43",
+    "path": "META-INF/media-api-libs/watermedia-1.3.43.jar",
+    "sha256": "ebe530f52e51d8a24867a98e3b22b5278c018c6b356f7209eb071673084e66e4",
+    "bytes": 37840250,
+    "bundled": true,
+    "unmodified": true
+  },
+  "cases": [
+    {
+      "label": "input-and-search",
+      "source_scene": "ftb-nova-input16-input-r3-040/client",
+      "result": {
+        "cleanroom": "0.4.0",
+        "side": "client",
+        "exit": 0,
+        "loader_version_seen": true,
+        "server_ready": false,
+        "timed_out": false,
+        "gameplay_report": {
+          "result": "PASS",
+          "cleanroom": "0.4.0",
+          "detail": "Chinese character-only commits; native AWT single/multiline apply/cancel/lifecycle/undo; real item and Ponder full-pinyin/initials selection; title/body network and disk roundtrip",
+          "video": false,
+          "ponder": true,
+          "zs": false
+        },
+        "result": "FUNCTIONAL_PASS"
+      },
+      "runtime": {
+        "cleanroom": "0.4.0",
+        "side": "client",
+        "userdev": false,
+        "installer_sha256": "882435d851a51e14b802e0a9384e4a05cfbb3890fca435c40c494af75e5a166f",
+        "jars": {
+          "FTBQuests-1202.10.0-modern.16.jar": "7552217d99242b8db0c1ef8f8d4cae65c2a7e071d23ea0256be9d3bea34fc5e5",
+          "FTB-Library-NovaEng-5.5.4-modern.4.jar": "bc5fc4cf156398c6c0ce8c17a9c5f918dcfb03dddf194d7f63c154419fa61376",
+          "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "4c26d02b108bc859541238665800d78b72373287643ef2e98d8dbc7a61fedb52",
+          "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
+          "MediaAPI-1.0.4.jar": "2b32e8d3adae9fdb3cab7651979f13c3326388e5f204e5e9794aa59a53974dc7",
+          "ftbquests-acceptance.jar": "2f75814f9abf806f036f11604a1a96d93fcf439f33562332dc80a3a01b801437",
+          "ponder-legacy-1.6.3.jar": "2158a1b19da21f88e56cad583e4d0a93fdb7d4ccad6c7f76622c0feab54f60e6"
+        }
+      }
+    },
+    {
+      "label": "text-editor-regression",
+      "source_scene": "ftb-nova-input16-texteditor-r1-040/client",
+      "result": {
+        "cleanroom": "0.4.0",
+        "side": "client",
+        "exit": 0,
+        "loader_version_seen": true,
+        "server_ready": false,
+        "timed_out": false,
+        "gameplay_report": {
+          "result": "PASS",
+          "cleanroom": "0.4.0",
+          "detail": "Native editor menu click; Chinese labels; legacy open/save/cancel; multiline typing and undo/redo; wide and narrow Markdown preview; native component form; server save/reload; unknown fields and trailing lines",
+          "video": false,
+          "ponder": false,
+          "zs": false
+        },
+        "result": "FUNCTIONAL_PASS"
+      },
+      "runtime": {
+        "cleanroom": "0.4.0",
+        "side": "client",
+        "userdev": false,
+        "installer_sha256": "882435d851a51e14b802e0a9384e4a05cfbb3890fca435c40c494af75e5a166f",
+        "jars": {
+          "FTBQuests-1202.10.0-modern.16.jar": "7552217d99242b8db0c1ef8f8d4cae65c2a7e071d23ea0256be9d3bea34fc5e5",
+          "FTB-Library-NovaEng-5.5.4-modern.4.jar": "bc5fc4cf156398c6c0ce8c17a9c5f918dcfb03dddf194d7f63c154419fa61376",
+          "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "4c26d02b108bc859541238665800d78b72373287643ef2e98d8dbc7a61fedb52",
+          "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
+          "MediaAPI-1.0.4.jar": "2b32e8d3adae9fdb3cab7651979f13c3326388e5f204e5e9794aa59a53974dc7",
+          "ftbquests-acceptance.jar": "2f75814f9abf806f036f11604a1a96d93fcf439f33562332dc80a3a01b801437"
+        }
+      }
+    },
+    {
+      "label": "optional-missing-server",
+      "source_scene": "ftb-nova-input16-none-r2-040/server",
+      "result": {
+        "cleanroom": "0.4.0",
+        "side": "server",
+        "exit": 0,
+        "loader_version_seen": true,
+        "server_ready": true,
+        "timed_out": false,
+        "gameplay_report": {
+          "result": "PASS",
+          "cleanroom": "0.4.0",
+          "detail": "server definition round trip",
+          "video": false,
+          "ponder": false,
+          "zs": false
+        },
+        "result": "FUNCTIONAL_PASS"
+      },
+      "runtime": {
+        "cleanroom": "0.4.0",
+        "side": "server",
+        "userdev": false,
+        "installer_sha256": "882435d851a51e14b802e0a9384e4a05cfbb3890fca435c40c494af75e5a166f",
+        "jars": {
+          "FTBQuests-1202.10.0-modern.16.jar": "7552217d99242b8db0c1ef8f8d4cae65c2a7e071d23ea0256be9d3bea34fc5e5",
+          "FTB-Library-NovaEng-5.5.4-modern.4.jar": "bc5fc4cf156398c6c0ce8c17a9c5f918dcfb03dddf194d7f63c154419fa61376",
+          "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "4c26d02b108bc859541238665800d78b72373287643ef2e98d8dbc7a61fedb52",
+          "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
+          "MediaAPI-1.0.4.jar": "2b32e8d3adae9fdb3cab7651979f13c3326388e5f204e5e9794aa59a53974dc7",
+          "ftbquests-acceptance.jar": "2f75814f9abf806f036f11604a1a96d93fcf439f33562332dc80a3a01b801437",
+          "Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar": "ab21b0b5940e83190cf84a9eb7f266332b7358e1942968b1213fe32260660bbb"
+        }
+      }
+    }
+  ],
+  "unit_suites": [
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.client.ClientEditSyncTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.client.CreationCallbackTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.client.EasingTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.client.LocalizationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.metadata.OptionalIntegrationSortingTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.texteditor.TextEditorTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.BilibiliVideoTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.CommandTemplatesTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.LegacyQuestFormatTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.LocalQuestVideoTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.MediaDataTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.MediaImportTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.PonderTargetTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.RewardOpeningTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-quests",
+      "name": "com.feed_the_beast.ftbquests.util.TransactionalStorageTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-library",
+      "name": "com.feed_the_beast.ftblib.lib.data.TeamUIDTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "module": "ftb-library",
+      "name": "com.feed_the_beast.ftblib.lib.util.PinyinSearchTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "quests_tests_rerun": 78,
+  "library_tests_rerun": 10,
+  "input_checks": {
+    "direct_commit_only_chinese_events_and_unicode_backspace": true,
+    "item_search_铁锭": true,
+    "item_search_tieding": true,
+    "item_search_td": true,
+    "item_search_iron_ingot": true,
+    "item_search_@minecraft": true,
+    "item_pinyin_selection_returns_actual_stack": true,
+    "native_single_line_peer_apply_cancel_and_chinese_text": true,
+    "native_input_closes_when_its_owner_changes": true,
+    "ponder_initials_find_localized_scene_title": true,
+    "ponder_full_pinyin_selects_exact_scene": true,
+    "native_multiline_undo_redo_and_title": true,
+    "chinese_network_disk_roundtrip_and_unknown_fields": true,
+    "native_ime_engine_keystrokes_not_automated": true
+  },
+  "changed_entries": {
+    "FTBQuests-1202.10.0-modern.16.jar": [
+      "com/feed_the_beast/ftbquests/FTBQuests.class",
+      "com/feed_the_beast/ftbquests/Tags.class",
+      "com/feed_the_beast/ftbquests/gui/GuiSelectPonder$EntryButton.class",
+      "com/feed_the_beast/ftbquests/gui/GuiSelectPonder.class",
+      "com/feed_the_beast/ftbquests/texteditor/MultilineTextBox.class",
+      "com/feed_the_beast/ftbquests/tile/TileProgressDetector$1.class",
+      "com/feed_the_beast/ftbquests/tile/TileProgressScreenCore$1.class",
+      "com/feed_the_beast/ftbquests/tile/TileRedstoneDetector$1.class",
+      "com/feed_the_beast/ftbquests/tile/TileTaskScreenCore$1.class",
+      "mcmod.info"
+    ],
+    "FTB-Library-NovaEng-5.5.4-modern.4.jar": [
+      "assets/ftblib/lang/en_us.lang",
+      "assets/ftblib/lang/zh_cn.lang",
+      "com/feed_the_beast/ftblib/FTBLib.class",
+      "com/feed_the_beast/ftblib/Tags.class",
+      "com/feed_the_beast/ftblib/client/CreativeItemIndex.class",
+      "com/feed_the_beast/ftblib/client/teamsgui/GuiCreateTeam$1.class",
+      "com/feed_the_beast/ftblib/client/teamsgui/GuiCreateTeam$2.class",
+      "com/feed_the_beast/ftblib/client/teamsgui/GuiCreateTeam$4.class",
+      "com/feed_the_beast/ftblib/lib/gui/TextBox.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiButtonListBase$1.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiButtonListBase.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiEditConfigValue$1.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiEditConfigValue$2.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiSelectItemStack$1.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiSelectItemStack$2.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiSelectItemStack$3.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiSelectItemStack$4.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiSelectItemStack$5.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiSelectItemStack$ThreadItemList.class",
+      "com/feed_the_beast/ftblib/lib/gui/misc/GuiSelectItemStack.class"
+    ]
+  },
+  "quest_model_network_storage_integration_bytes_match_modern15": true,
+  "library_team_data_and_network_bytes_match_modern3": true,
+  "native_ime_engine_keystrokes_automated": false,
+  "pinyin_backend": "Cleanroom bundled ICU Han-Latin",
+  "additional_runtime_jars": false,
+  "limits": [
+    "Linux x86_64 / formal Cleanroom 0.4.0 actual installation jars; Windows/macOS and full user modpack not run.",
+    "Native AWT peers, input context availability, apply/cancel/window lifecycle and Chinese single/multiline roundtrip were exercised. Actual OS input-method engine composition/candidate keystrokes were not automated; programmatically setting native text is not represented as a full IME-engine test.",
+    "Native input is a built-in system editor opened by 中 or F4; GLFW/Cleanroom native IME handling was not replaced. A desktop and configured system IME are required for composition.",
+    "Pinyin uses ICU Han-Latin for the current displayed name. It does not enumerate every polyphonic reading or synthesize a Chinese localization in an English UI.",
+    "Media API 1.0.4, embedded WATERMeDIA, Utilities and ItemFilters bytes match modern.15. Media playback, ZS, opening animation and optional MCP were not rerun; historical evidence retained."
+  ]
+}

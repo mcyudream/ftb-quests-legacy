@@ -1,0 +1,13 @@
+{
+  "tag": "v1202.10.0-modern.16",
+  "title": "FTB Quests Legacy 1202.10.0-modern.16",
+  "prerelease": false,
+  "minecraft": "1.12.2",
+  "cleanroom": "0.4.0",
+  "java": 25,
+  "modules": {
+    "ftb-quests": "FTBQuests-1202.10.0-modern.16",
+    "ftb-library": "FTB-Library-NovaEng-5.5.4-modern.4",
+    "ftb-utilities": "FTB-Utilities-NovaEng-5.5.1-modern.2"
+  }
+}

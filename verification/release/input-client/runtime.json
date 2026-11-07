@@ -1,0 +1,14 @@
+{
+  "cleanroom": "0.4.0",
+  "side": "client",
+  "userdev": false,
+  "installer_sha256": "882435d851a51e14b802e0a9384e4a05cfbb3890fca435c40c494af75e5a166f",
+  "jars": {
+    "FTBQuests-1202.10.0-modern.16.jar": "ae826ad204b0a857135fa0dba9ccd662e0d90be37623ceeb018f82e473d27ed3",
+    "FTB-Library-NovaEng-5.5.4-modern.4.jar": "cf643badfc59f02730c3ebaafb91edc3eaf5ec40bf132e6a679c77b6fec3813a",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "b18d7803f355f8e4402c15fe2aba7ef89e39747e31385102035db2bc16593875",
+    "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
+    "ftbquests-acceptance.jar": "9a8fa465d4c365daa16a5f35e0255b2703decb98a784ac194f82ca347d643135",
+    "ponder-legacy-1.6.3.jar": "2158a1b19da21f88e56cad583e4d0a93fdb7d4ccad6c7f76622c0feab54f60e6"
+  }
+}

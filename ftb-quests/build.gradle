@@ -1,0 +1,96 @@
+plugins {
+    id 'java-library'
+    id 'com.cleanroommc.cleanroomgradle'
+}
+
+group = 'com.feed_the_beast.mods'
+version = '1202.10.0-modern.16'
+base.archivesName = 'FTBQuests'
+java { toolchain.languageVersion = JavaLanguageVersion.of(25); withSourcesJar() }
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.cleanroommc.com' }
+    maven { url = 'https://maven.blamejared.com' }
+    flatDir { dirs rootProject.file('.build-deps') }
+}
+
+apply from: '../ftb-quests/dependency-lock.gradle'
+
+def ponderLock = new groovy.json.JsonSlurper().parse(file('ponder-compat.lock.json'))
+def ponderSdk = new File(project.findProperty('ftbDepsDir') ? file(project.property('ftbDepsDir')) : rootProject.file('.build-deps'), ponderLock.sdk_file)
+tasks.register('verifyPonderSdk') {
+    inputs.file('ponder-compat.lock.json')
+    inputs.file(ponderSdk)
+    doLast {
+        def digest = java.security.MessageDigest.getInstance('SHA-256').digest(ponderSdk.bytes).encodeHex().toString()
+        if (digest != ponderLock.sdk_sha256) throw new GradleException('Ponder compile-only SDK does not match ponder-compat.lock.json')
+    }
+}
+
+dependencies {
+    implementation cleanroom.userdev(cleanroom_version)
+    compileOnly project(':mcp-server')
+    compileOnly project(':media-api')
+    // Optional client adapter only; see ponder-compat.lock.json.
+    compileOnly deobf([name: 'ponder-legacy-1.5.0'])
+    compileOnly project(':ftb-library')
+    compileOnly project(':ftb-utilities')
+    ftbLockedDependencies.each { compileOnly deobf([name: ftbDependencyName(it)]) }
+    compileOnly 'mezz.jei:jei_1.12.2:4.16.1.302:api'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation project(':ftb-library')
+    testImplementation deobf([name: 'ItemFilters-1.0.4.2'])
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.0'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xmaxerrs', '300']
+}
+tasks.withType(Test).configureEach { useJUnitPlatform() }
+def generatedTags = layout.buildDirectory.dir('generated/sources/tags')
+tasks.register('generateTags') {
+    inputs.property('version', project.version)
+    outputs.dir(generatedTags)
+    doLast {
+        def out = generatedTags.get().file('com/feed_the_beast/ftbquests/Tags.java').asFile
+        out.parentFile.mkdirs()
+        out.text = 'package com.feed_the_beast.ftbquests; public final class Tags { public static final String VERSION = "' + project.version + '"; }'
+    }
+}
+sourceSets.main.java.srcDir(generatedTags)
+compileJava.dependsOn('generateTags', 'verifyPonderSdk')
+tasks.named('sourcesJar') { dependsOn('generateTags') }
+tasks.withType(net.minecraftforge.renamer.gradle.RenameJar).configureEach {
+    javaLauncher.set(javaToolchains.launcherFor { spec -> spec.languageVersion.set(JavaLanguageVersion.of(25)) })
+}
+processResources {
+    inputs.property('version',project.version)
+    filesMatching('mcmod.info') { expand version: project.version, mcversion: '1.12.2' }
+}
+jar {
+    manifest { attributes 'ModType': 'CRL' }
+    from 'upstream-lock.json'
+    from 'ponder-compat.lock.json'
+}
+
+// Acceptance code is packaged separately and is never included in the installation jar.
+sourceSets {
+    acceptance {
+        java.srcDir 'verification/src/main/java'
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+}
+tasks.register('acceptanceJar', Jar) {
+    dependsOn tasks.acceptanceClasses
+    archiveFileName = 'ftbquests-acceptance-mcp.jar'
+    destinationDirectory = layout.buildDirectory.dir('verification')
+    from sourceSets.acceptance.output
+}
+extensions.getByType(net.minecraftforge.renamer.gradle.RenamerExtension).classes('reobfAcceptanceJar', tasks.named('acceptanceJar')) {
+    map.from tasks.named('reobfJar').get().map
+    libraries.setFrom(sourceSets.main.compileClasspath, tasks.named('jar'), project(':ftb-library').tasks.named('jar'))
+    output = layout.buildDirectory.file('verification/ftbquests-acceptance.jar')
+}

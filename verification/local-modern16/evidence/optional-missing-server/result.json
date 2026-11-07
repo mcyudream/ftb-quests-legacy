@@ -1,0 +1,17 @@
+{
+  "cleanroom": "0.4.0",
+  "side": "server",
+  "exit": 0,
+  "loader_version_seen": true,
+  "server_ready": true,
+  "timed_out": false,
+  "gameplay_report": {
+    "result": "PASS",
+    "cleanroom": "0.4.0",
+    "detail": "server definition round trip",
+    "video": false,
+    "ponder": false,
+    "zs": false
+  },
+  "result": "FUNCTIONAL_PASS"
+}

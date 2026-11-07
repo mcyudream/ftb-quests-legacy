@@ -1,0 +1,138 @@
+[
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.client.ClientEditSyncTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.client.CreationCallbackTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.client.EasingTest",
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.client.LocalizationTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.metadata.OptionalIntegrationSortingTest",
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.texteditor.TextEditorTest",
+    "tests": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.BilibiliVideoTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.CommandTemplatesTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.LegacyQuestFormatTest",
+    "tests": 16,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.LocalQuestVideoTest",
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.MediaDataTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.MediaImportTest",
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.PonderTargetTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.RewardOpeningTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-quests",
+    "name": "com.feed_the_beast.ftbquests.util.TransactionalStorageTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-library",
+    "name": "com.feed_the_beast.ftblib.lib.data.TeamUIDTest",
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "ftb-library",
+    "name": "com.feed_the_beast.ftblib.lib.util.PinyinSearchTest",
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+]

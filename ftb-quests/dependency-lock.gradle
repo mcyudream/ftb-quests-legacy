@@ -1,0 +1,15 @@
+import groovy.json.JsonSlurper
+import java.security.MessageDigest
+
+def lockDirectory = file('../ftb-quests')
+def cache = project.findProperty('ftbDepsDir') ? file(project.property('ftbDepsDir')) : rootProject.file('.build-deps')
+def entries = new JsonSlurper().parse(new File(lockDirectory, 'dependencies.lock.json'))
+ext.ftbLockedDependencies = entries.findAll { it.projects.contains(project.name) }
+ext.ftbDependencyName = { entry ->
+    def artifact = new File(cache, entry.file)
+    if (!artifact.isFile()) throw new GradleException("Missing ${entry.file}. Run python3 ${lockDirectory}/tools/fetch_dependencies.py")
+    def actual = MessageDigest.getInstance('SHA-256').digest(artifact.bytes).encodeHex().toString()
+    if (actual != entry.sha256) throw new GradleException("SHA-256 mismatch for ${artifact}; run tools/fetch_dependencies.py to restore the locked file")
+    entry.file.substring(0, entry.file.length() - 4)
+}
+repositories { flatDir { dirs cache } }

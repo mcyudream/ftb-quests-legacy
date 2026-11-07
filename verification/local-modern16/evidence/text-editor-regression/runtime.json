@@ -1,0 +1,14 @@
+{
+  "cleanroom": "0.4.0",
+  "side": "client",
+  "userdev": false,
+  "installer_sha256": "882435d851a51e14b802e0a9384e4a05cfbb3890fca435c40c494af75e5a166f",
+  "jars": {
+    "FTBQuests-1202.10.0-modern.16.jar": "7552217d99242b8db0c1ef8f8d4cae65c2a7e071d23ea0256be9d3bea34fc5e5",
+    "FTB-Library-NovaEng-5.5.4-modern.4.jar": "bc5fc4cf156398c6c0ce8c17a9c5f918dcfb03dddf194d7f63c154419fa61376",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "4c26d02b108bc859541238665800d78b72373287643ef2e98d8dbc7a61fedb52",
+    "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
+    "MediaAPI-1.0.4.jar": "2b32e8d3adae9fdb3cab7651979f13c3326388e5f204e5e9794aa59a53974dc7",
+    "ftbquests-acceptance.jar": "2f75814f9abf806f036f11604a1a96d93fcf439f33562332dc80a3a01b801437"
+  }
+}

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "ftbquests:reward_collector",
+	"result": {"item": "reward_collector"},
+	"ingredients": [
+		{"item": "book"},
+		{"type": "forge:ore_dict", "ore": "chest"}
+	]
+}

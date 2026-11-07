@@ -1,0 +1,10 @@
+.gradle/
+.build-deps/
+**/build/
+**/run/
+**/logs/
+*.log
+__pycache__/
+.env*
+*.jar
+!gradle/wrapper/gradle-wrapper.jar

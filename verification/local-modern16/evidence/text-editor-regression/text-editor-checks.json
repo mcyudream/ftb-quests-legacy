@@ -1,0 +1,11 @@
+{
+  "context_menu_click_opens_native_editor": true,
+  "legacy_open_is_lossless": true,
+  "cancel_keeps_legacy_data": true,
+  "multiline_input_and_local_undo_redo": true,
+  "live_preview_rendered": true,
+  "native_component_form_and_cancel": true,
+  "narrow_source_preview_tabs": true,
+  "save_network_reopen_and_disk_roundtrip": true,
+  "unknown_quest_fields_preserved": true
+}

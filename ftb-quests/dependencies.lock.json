@@ -1,0 +1,144 @@
+[
+  {
+    "file": "Baubles-1.12-1.5.2.jar",
+    "url": "https://cursemaven.com/curse/maven/baubles-227083/2518667/baubles-227083-2518667.jar",
+    "sha256": "b32010b2f2778aa1188585e7ead91ad46d4cb2c715f9c778a61848ba7fe51f8d",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "Botania r1.10-364.4.jar",
+    "url": "https://cursemaven.com/curse/maven/botania-225643/3330934/botania-225643-3330934.jar",
+    "sha256": "8962beb2c583720a83858f58bd6afc891185b50d868c712549a96b191339b52a",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "ItemFilters-1.0.4.2.jar",
+    "url": "https://cursemaven.com/curse/maven/itemfilters-309674/3003364/itemfilters-309674-3003364.jar",
+    "sha256": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "KubeJS-forge-1.12.2-1.1.0.65.jar",
+    "url": "https://cursemaven.com/curse/maven/kubejs-238086/3052392/kubejs-238086-3052392.jar",
+    "sha256": "22531c40adb1ac263c80a53137fdff6a9d7a32f5ee79a0a2b793c594f4cbc512",
+    "projects": [
+      "ftb-quests",
+      "ftb-utilities"
+    ]
+  },
+  {
+    "file": "aurora-2817929.jar",
+    "url": "https://cursemaven.com/curse/maven/aurora-342117/2817929/aurora-342117-2817929.jar",
+    "sha256": "b8a60b6206e65310cf6c4632930860d4e330c9e97135540f1b4dacb3469ff52e",
+    "projects": [
+      "ftb-quests",
+      "ftb-utilities"
+    ]
+  },
+  {
+    "file": "buildcraft-core-2756441.jar",
+    "url": "https://cursemaven.com/curse/maven/buildcraft-core-231305/2756441/buildcraft-core-231305-2756441.jar",
+    "sha256": "df8178f064820b00cf984dd7feb443588ea209c45a4894975f9416857d26a376",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "chiselsbits-2720655.jar",
+    "url": "https://cursemaven.com/curse/maven/chiselsbits-231095/2720655/chiselsbits-231095-2720655.jar",
+    "sha256": "0b086aced1beca90ed5bb25fe6951a4d191d9b49f221af1074d1f9ff4f364b74",
+    "projects": [
+      "ftb-quests",
+      "ftb-utilities"
+    ]
+  },
+  {
+    "file": "custom-npcs-2799797.jar",
+    "url": "https://cursemaven.com/curse/maven/custom-npcs-221826/2799797/custom-npcs-221826-2799797.jar",
+    "sha256": "cafacade45fb2aa6ac52956487889d0f4a9d4f6a1682ea28a1f7aca1ba100fa1",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "gamestages-2758688.jar",
+    "url": "https://cursemaven.com/curse/maven/gamestages-268655/2758688/gamestages-268655-2758688.jar",
+    "sha256": "193d3bb2cb9870b2363663724ec7a352ad3442a27ec7b9f9e2c68fe8c588057d",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "hei-5210315.jar",
+    "url": "https://cursemaven.com/curse/maven/hei-557549/5210315/hei-557549-5210315.jar",
+    "sha256": "349e1567d72535476c5ce76057c55f028fb9fc162f90287444034f9d70fd9701",
+    "projects": [
+      "ftb-quests",
+      "ftb-library"
+    ]
+  },
+  {
+    "file": "ichunutil-2801262.jar",
+    "url": "https://cursemaven.com/curse/maven/ichunutil-229060/2801262/ichunutil-229060-2801262.jar",
+    "sha256": "e0b90727cbe54a11fe568f3d60cd59d64ff3c14f82437e1d1c10b575886ab8a3",
+    "projects": [
+      "ftb-quests",
+      "ftb-utilities"
+    ]
+  },
+  {
+    "file": "industrialcraft-2-2.8.188-ex112.jar",
+    "url": "https://maven.ic2.player.to/net/industrial-craft/industrialcraft-2/2.8.188-ex112/industrialcraft-2-2.8.188-ex112.jar",
+    "sha256": "9aed86a1b91ed929ccd21d1ae61cf63c8c232df81f4ff7b9611e008d0df1b00b",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "journeymap-5172461.jar",
+    "url": "https://cursemaven.com/curse/maven/journeymap-32274/5172461/journeymap-32274-5172461.jar",
+    "sha256": "b72c9dd7e6dd0f7438c01ea8e440519bf4a3c0b47674810929a9c899dc98b406",
+    "projects": [
+      "ftb-quests",
+      "ftb-utilities"
+    ]
+  },
+  {
+    "file": "packmode-1.12.2-1.2.0.jar",
+    "url": "https://cursemaven.com/curse/maven/packmode-278398/2567799/packmode-278398-2567799.jar",
+    "sha256": "c5433d2f0864b6ae1075147c709817a97b8f99370fc56037d21fc200d7e0ff44",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "projecte-2702991.jar",
+    "url": "https://cursemaven.com/curse/maven/projecte-226410/2702991/projecte-226410-2702991.jar",
+    "sha256": "9a46c66e95487bcfb7d715650817a9c30df5c759013bb6cb0d3290b261212595",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "reskillable-2815686.jar",
+    "url": "https://cursemaven.com/curse/maven/reskillable-286382/2815686/reskillable-286382-2815686.jar",
+    "sha256": "4f753070e7614790141717277dea0548533894fe32ad4b131c7511cb19bd0305",
+    "projects": [
+      "ftb-quests"
+    ]
+  },
+  {
+    "file": "crafttweaker-4.1.20.698.jar",
+    "url": "https://api.modrinth.com/maven/maven/modrinth/crafttweaker/4.1.20.698/crafttweaker-4.1.20.698.jar",
+    "sha256": "b2e5e443f18d0d5bcfd1364f9ec89565e6a1e2ad4568b899c590aa5507978b27",
+    "projects": [
+      "ftb-quests"
+    ]
+  }
+]

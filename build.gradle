@@ -1,0 +1,8 @@
+plugins { id 'base' }
+subprojects {
+ tasks.withType(AbstractArchiveTask).configureEach {
+  preserveFileTimestamps = false
+  reproducibleFileOrder = true
+ }
+}
+tasks.named('build') { dependsOn ':ftb-quests:build', ':ftb-library:build', ':ftb-utilities:build' }

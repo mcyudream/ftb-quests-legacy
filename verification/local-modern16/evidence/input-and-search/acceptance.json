@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "cleanroom": "0.4.0",
+  "detail": "Chinese character-only commits; native AWT single/multiline apply/cancel/lifecycle/undo; real item and Ponder full-pinyin/initials selection; title/body network and disk roundtrip",
+  "video": false,
+  "ponder": true,
+  "zs": false
+}

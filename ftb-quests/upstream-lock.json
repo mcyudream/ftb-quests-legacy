@@ -1,0 +1,33 @@
+{
+  "baseline": {
+    "repository": "https://github.com/NovaEngineering-Source/FTB-Quests-NovaEng",
+    "branch": "1.12",
+    "commit": "00eca86f04f843d2e779c70a19281a2760f3ebce",
+    "version": "1202.10.0"
+  },
+  "features": {
+    "repository": "https://github.com/FTBTeam/FTB-Quests",
+    "branch": "main",
+    "commit": "3fc875bb085d4b2236b98abc042c5fa40711b67d",
+    "version": "26.1.2.9"
+  },
+  "runtime": {
+    "minecraft": "1.12.2",
+    "cleanroom": "0.4.0",
+    "java": 25
+  },
+  "libraries": {
+    "FTB-Library-NovaEng": {
+      "repository": "https://github.com/NovaEngineering-Source/FTB-Library-NovaEng",
+      "branch": "1.12",
+      "commit": "86c01bbb2610c3c2107c1269c31167ab2d3d4120",
+      "version": "5.5.3"
+    },
+    "FTB-Utilities-NovaEng": {
+      "repository": "https://github.com/NovaEngineering-Source/FTB-Utilities-NovaEng",
+      "branch": "master",
+      "commit": "e5dc0bdd4cfb1f9ff5ea2377287a61bb7c5f6540",
+      "version": "5.5.0"
+    }
+  }
+}

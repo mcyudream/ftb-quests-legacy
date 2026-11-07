@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "cleanroom": "0.4.0",
+  "detail": "Native editor menu click; Chinese labels; legacy open/save/cancel; multiline typing and undo/redo; wide and narrow Markdown preview; native component form; server save/reload; unknown fields and trailing lines",
+  "video": false,
+  "ponder": false,
+  "zs": false
+}

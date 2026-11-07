@@ -1,0 +1,6 @@
+plugins { id 'java-library'; id 'com.cleanroommc.cleanroomgradle' }
+group='dev.yudream.buildonly'
+version='1.0.0'
+java { toolchain.languageVersion=JavaLanguageVersion.of(25) }
+dependencies { implementation cleanroom.userdev(cleanroom_version) }
+tasks.withType(JavaCompile).configureEach { options.encoding='UTF-8' }
