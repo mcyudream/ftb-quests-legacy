@@ -6,11 +6,13 @@ Minecraft **1.12.2** · **正式 Cleanroom 0.4.0** · **Java 25**
 
 ## 安装
 
-客户端和服务端将 FTB Quests 更新到 modern.16，配套版本如下；已有相同版本的依赖保留一份，移走旧版同 Mod ID 的文件：
+modern.17 修复 Windows 自动保存时整目录重命名被拒绝的问题，并加入保存失败后的重试与快照保留。任务数据格式不变；详见 [热修复说明](../docs/releases/1202.10.0-modern.17.md)。
+
+客户端和服务端将 FTB Quests 更新到 modern.17，配套版本如下；已有相同版本的依赖保留一份，移走旧版同 Mod ID 的文件：
 
 | 文件 | 用途 |
 | --- | --- |
-| `FTBQuests-1202.10.0-modern.16.jar` | 任务系统 |
+| `FTBQuests-1202.10.0-modern.17.jar` | 任务系统 |
 | `FTB-Library-NovaEng-5.5.4-modern.4.jar` | 修复单人存档 UID 2 误判，保留 Nova int 团队 UID |
 | `FTB-Utilities-NovaEng-5.5.1-modern.2.jar` | 配套团队、权限及工具 |
 | `ItemFilters-1.0.4.2.jar` | 必装前置；已有相同版本时保留一份 |

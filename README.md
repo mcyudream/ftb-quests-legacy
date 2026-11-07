@@ -14,7 +14,7 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 
 | 文件 | 版本 |
 | --- | --- |
-| FTB Quests | `FTBQuests-1202.10.0-modern.16.jar` |
+| FTB Quests | `FTBQuests-1202.10.0-modern.17.jar` |
 | FTB Library | `FTB-Library-NovaEng-5.5.4-modern.4.jar` |
 | FTB Utilities（原整合包使用时保留） | `FTB-Utilities-NovaEng-5.5.1-modern.2.jar` |
 | ItemFilters（必装，另从原发布页下载） | `1.0.4.2` |
@@ -26,6 +26,8 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可选，分别安装对应运行 Mod；[Ponder Legacy](https://github.com/mcyudream/ponder-legacy/releases) 无需随任务系统重复捆绑。公开发行的三个 FTB JAR 不内嵌媒体运行库，已有 Media API 的视频接入继续保留。
 
 ## 本版要点
+
+- **modern.17 Windows 保存热修复**：保持任务根目录不动，完整备份与事务回滚后逐文件原子提交；I/O 失败保留脏状态并间隔 5 秒重试。兼容旧事务记录和任务数据。详见 [发行说明](docs/releases/1202.10.0-modern.17.md)。
 
 - 输入框右侧“中”按钮／聚焦后 **F4** 打开系统输入法编辑窗口；确认回填，取消不改原文，正文支持多行与一次撤销。游戏原有直接 Unicode 输入保留。
 - 物品和思索选择器支持中文、英文、注册名／教程 ID、全拼和首字母；`tieding`／`td` 可查询铁锭。索引使用 Cleanroom 自带 ICU，在后台生成与缓存。
@@ -44,7 +46,7 @@ python3 tools/prepare_release.py
 
 使用 Java 25 和 Python 3.11+。依赖按锁文件下载并校验 SHA-256，缓存位于 `.build-deps/`；不依赖维护者的同级工作目录。Cleanroom 编译 SDK 与最低运行基线分别声明；较新的 SDK 不提高最低加载器版本。
 
-CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁、执行 Quests／Library／补丁单元测试、重混淆、检查产物并保存 JAR／源码包／测试报告。推送与 `release.json` 一致的 `v*` 标签后，在通过构建和验证后自动发布 **非预览** GitHub Release。`SHA256SUMS` 校验下载文件，`BUILD-INFO.json` 记录提交与内容摘要。
+CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁、执行 Quests／Library／补丁单元测试、重混淆、检查产物并保存 JAR／源码包／测试报告。推送与 `release.json` 一致的 `v*` 标签后，在 Linux 构建和 Windows 原生文件锁检查均通过后自动发布 **非预览** GitHub Release。`SHA256SUMS` 校验下载文件，`BUILD-INFO.json` 记录提交与内容摘要。
 
 ## 验证范围
 

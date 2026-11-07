@@ -316,9 +316,42 @@ class LegacyQuestFormatTest
         assertNotNull(loaded.getQuest(-2));
     }
 
+    @Test void failedAutosaveRetainsDirtyEditsAndRetriesAfterBackoff() throws Exception
+    {
+        FixtureFile book = oldBook();
+        book.getQuest(-2).title = "等待重试的中文任务";
+        Path blocker = Files.createDirectory(root.resolve(".normal.transaction"));
+        assertFalse(book.trySaveNow());
+        assertTrue(book.shouldSave);
+        Files.delete(blocker);
+        book.retrySaveIfDue();
+        assertTrue(book.shouldSave);
+        assertEquals("任务", SNBT.read(root.resolve("normal/chapters/12345678/fffffffe.snbt").toFile()).getString("title"));
+        book.clock += java.util.concurrent.TimeUnit.SECONDS.toNanos(5);
+        book.retrySaveIfDue();
+        assertFalse(book.shouldSave);
+        FixtureFile reloaded = new FixtureFile(book.getFolder());
+        reloaded.readDataFull(reloaded.getFolder());
+        assertEquals("等待重试的中文任务", reloaded.getQuest(-2).title);
+        assertEquals(EditHistory.snapshot(book.getQuest(-2)), EditHistory.snapshot(reloaded.getQuest(-2)));
+    }
+
+    @Test void explicitSaveFailureAlsoRetainsDirtyState() throws Exception
+    {
+        FixtureFile book = oldBook();
+        Path blocker = Files.createDirectory(root.resolve(".normal.transaction"));
+        assertThrows(RuntimeException.class, book::saveNow);
+        assertTrue(book.shouldSave);
+        Files.delete(blocker);
+        book.saveNow();
+        assertFalse(book.shouldSave);
+    }
+
     static class FixtureFile extends ServerQuestFile
     {
         private final File directory;
+        long clock = 1;
+        @Override protected long saveTimeNanos() { return clock; }
         FixtureFile(File directory) { super(null); this.directory = directory; }
         @Override public File getFolder() { return directory; }
         @Override public Collection<ServerQuestData> getAllData() { return Collections.emptyList(); }

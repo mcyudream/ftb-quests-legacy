@@ -101,8 +101,7 @@ public class FTBQuestsWorldData implements IConfigCallback
 	{
 		if (ServerQuestFile.INSTANCE != null && ServerQuestFile.INSTANCE.shouldSave)
 		{
-			ServerQuestFile.INSTANCE.saveNow();
-			ServerQuestFile.INSTANCE.shouldSave = false;
+			ServerQuestFile.INSTANCE.trySaveNow();
 		}
 
 		NBTTagCompound nbt = new NBTTagCompound();
@@ -123,6 +122,13 @@ public class FTBQuestsWorldData implements IConfigCallback
 		{
 			event.setData(FTBQuests.MOD_ID, nbt);
 		}
+	}
+
+	@SubscribeEvent
+	public static void onServerTick(net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent event)
+	{
+		if (event.phase == net.minecraftforge.fml.common.gameevent.TickEvent.Phase.END && ServerQuestFile.INSTANCE != null)
+			ServerQuestFile.INSTANCE.retrySaveIfDue();
 	}
 
 	@SubscribeEvent

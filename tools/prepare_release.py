@@ -7,7 +7,9 @@ ROOT=Path(__file__).resolve().parents[1]
 def sha(path):
  with path.open('rb') as stream:return hashlib.file_digest(stream,'sha256').hexdigest()
 def main():
- config=json.loads((ROOT/'release.json').read_text());dest=ROOT/'build/release';dest.mkdir(parents=True,exist_ok=True)
+ config=json.loads((ROOT/'release.json').read_text());dest=ROOT/'build/release'
+ if dest.exists():shutil.rmtree(dest)
+ dest.mkdir(parents=True)
  if os.environ.get('GITHUB_REF_TYPE')=='tag' and os.environ.get('GITHUB_REF_NAME')!=config['tag']:raise SystemExit('Release tag does not match release.json')
  if config['prerelease'] is not False:raise SystemExit('This release must be stable')
  counts={};entries={}
@@ -32,12 +34,12 @@ def main():
   for report in (ROOT/module/'build/test-results/test').glob('TEST-*.xml'):
    e=ET.parse(report).getroot();assert all(int(e.get(k,'0'))==0 for k in ['failures','errors','skipped']);tests.append(int(e.get('tests')))
   counts[module]=sum(tests)
- assert counts['ftb-quests']>=78 and counts['ftb-library']>=10 and counts['server-compat']>=2,counts
+ assert counts['ftb-quests']>=87 and counts['ftb-library']>=10 and counts['server-compat']>=2,counts
  try:commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True,stderr=subprocess.DEVNULL).strip()
  except subprocess.CalledProcessError:commit='uncommitted-local-candidate'
  record={'repository':'mcyudream/ftb-quests-legacy','commit':commit,'release':config,'tests':counts,'production_entries_sha256':entries}
  (dest/'BUILD-INFO.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
- shutil.copyfile(ROOT/'docs/releases/1202.10.0-modern.16.md',dest/'RELEASE-NOTES.md')
+ shutil.copyfile(ROOT/'docs/releases'/(config['tag'].removeprefix('v')+'.md'),dest/'RELEASE-NOTES.md')
  files=sorted(p for p in dest.iterdir() if p.is_file() and p.name!='SHA256SUMS')
  (dest/'SHA256SUMS').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in files))
  print(json.dumps({'files':[p.name for p in files],'tests':counts,'production_sha256':{p.name:sha(p) for p in files if p.suffix=='.jar' and '-sources' not in p.name}},indent=2))

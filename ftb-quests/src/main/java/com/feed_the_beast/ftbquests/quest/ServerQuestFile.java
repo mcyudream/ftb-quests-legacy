@@ -28,6 +28,9 @@ public class ServerQuestFile extends QuestFile
 	public boolean shouldSave = false;
 	private boolean isLoading = false;
 	private File folder;
+	private long retrySaveAfter;
+	private boolean saveRetryPending;
+	private static final long SAVE_RETRY_NANOS = java.util.concurrent.TimeUnit.SECONDS.toNanos(5);
 
 	public ServerQuestFile(Universe u)
 	{
@@ -163,7 +166,49 @@ public class ServerQuestFile extends QuestFile
 
 	public void saveNow()
 	{
-		writeDataFull(getFolder());
+		shouldSave = true;
+		try
+		{
+			writeDataFull(getFolder());
+			shouldSave = false;
+			saveRetryPending = false;
+		}
+		catch (RuntimeException failure)
+		{
+			if (isStorageFailure(failure))
+			{
+				saveRetryPending = true;
+				retrySaveAfter = saveTimeNanos() + SAVE_RETRY_NANOS;
+				FTBQuests.LOGGER.error("Quest save failed; edits remain pending and will retry in 5 seconds. Keep the transaction backups and any unsaved snapshot.", failure);
+			}
+			throw failure;
+		}
+	}
+
+	protected long saveTimeNanos() { return System.nanoTime(); }
+
+	private static boolean isStorageFailure(Throwable failure)
+	{
+		for (Throwable cause = failure; cause != null; cause = cause.getCause())
+			if (cause instanceof java.io.IOException) return true;
+		return false;
+	}
+
+	/** World autosaves must not crash the server or discard pending edits on an I/O failure. */
+	public boolean trySaveNow()
+	{
+		if (saveRetryPending && saveTimeNanos() - retrySaveAfter < 0) return false;
+		try { saveNow(); return true; }
+		catch (RuntimeException failure)
+		{
+			if (!isStorageFailure(failure)) throw failure;
+			return false;
+		}
+	}
+
+	public void retrySaveIfDue()
+	{
+		if (shouldSave && saveRetryPending && saveTimeNanos() - retrySaveAfter >= 0) trySaveNow();
 	}
 
 	public void unload()

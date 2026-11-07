@@ -56,7 +56,9 @@ public final class AcceptanceMod
     { Map<Integer,net.minecraft.nbt.NBTTagCompound> result=new TreeMap<>();for(QuestObjectBase object:file.getAllObjects())result.put(object.id,EditHistory.snapshot(object));return result; }
     public static void roundTrip()
     {
-        ServerQuestFile file=ServerQuestFile.INSTANCE; var before=snapshot(file);
+        ServerQuestFile file=ServerQuestFile.INSTANCE;
+        try { AcceptanceStorage.check(file); } catch (Exception ex) { throw new RuntimeException(ex); }
+        var before=snapshot(file);
         require(!before.isEmpty(),"Existing quest book was not loaded");file.saveNow();file.readDataFull(file.getFolder());
         require(before.equals(snapshot(file)),"Quest definitions differ after save/reload");
     }
