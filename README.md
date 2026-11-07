@@ -15,7 +15,7 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 | 文件 | 版本 |
 | --- | --- |
 | FTB Quests | `FTBQuests-1202.10.0-modern.17.jar` |
-| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.4.jar` |
+| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.5.jar` |
 | FTB Utilities（原整合包使用时保留） | `FTB-Utilities-NovaEng-5.5.1-modern.2.jar` |
 | ItemFilters（必装，另从原发布页下载） | `1.0.4.2` |
 
@@ -29,7 +29,7 @@ Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可
 
 - **modern.17 Windows 保存热修复**：保持任务根目录不动，完整备份与事务回滚后逐文件原子提交；I/O 失败保留脏状态并间隔 5 秒重试。兼容旧事务记录和任务数据。详见 [发行说明](docs/releases/1202.10.0-modern.17.md)。
 
-- 输入框右侧“中”按钮／聚焦后 **F4** 打开系统输入法编辑窗口；确认回填，取消不改原文，正文支持多行与一次撤销。游戏原有直接 Unicode 输入保留。
+- **在原输入框直接编辑中文**：移除“中”按钮、F4 及独立系统编辑窗口；标题、搜索和多行正文接收游戏的 Unicode 字符事件，补充汉字作为完整字符插入与撤销。物品／思索拼音检索保持可用。
 - 物品和思索选择器支持中文、英文、注册名／教程 ID、全拼和首字母；`tieding`／`td` 可查询铁锭。索引使用 Cleanroom 自带 ICU，在后台生成与缓存。
 - 详情淡入淡出、轻微缩放；侧栏、悬停、画布缩放和开箱过渡更柔和；编辑模式仍即时响应。
 - 任务格式及事务存储不变；复用原服务端校验与同步。可选思索的搜索链接返回准确场景 ID。
@@ -52,4 +52,4 @@ CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁�
 
 原本地版在正式 Cleanroom 0.4.0（非 userdev）进行客户端／专服验收，Quests 78 项、Library 10 项单元测试通过：[原始报告](verification/local-modern16/REPORT.md)。公开构建的运行证据和最终哈希记录在 [发行验收](verification/release/README.md)。
 
-中文系统窗口已检查真实 AWT 控件、输入法上下文、确认／取消、中文回填及保存；**系统输入法引擎的真实候选词按键流程未自动化实测**。Linux x86_64 已验证，Windows/macOS 和完整整合包未实测。拼音采用当前显示名及 ICU 的读音，未枚举所有多音字别名。详见使用说明。
+modern.17 已移除独立系统编辑窗口，中文按游戏键盘字符队列送入原输入框并验证保存；**系统输入法引擎的真实候选词按键流程未自动化实测**。Linux x86_64 已验证，Windows/macOS 和完整整合包未实测。拼音采用当前显示名及 ICU 的读音，未枚举所有多音字别名。详见使用说明。

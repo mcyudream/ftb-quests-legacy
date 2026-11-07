@@ -13,6 +13,7 @@ public final class MultilineTextBox extends Widget
     public final EditorBuffer buffer;
     private final Runnable changed, paste;
     private boolean focused = true, dragging, scrollDragging;
+    private final com.feed_the_beast.ftblib.lib.util.UnicodeTextInput characterInput = new com.feed_the_beast.ftblib.lib.util.UnicodeTextInput();
     private SourceLayout layout;
     private String layoutText;
     private int layoutWidth, topRow;
@@ -23,7 +24,7 @@ public final class MultilineTextBox extends Widget
         super(panel); buffer = new EditorBuffer(text); this.changed = changed; this.paste = paste;
     }
 
-    public void setFocused(boolean value) { focused = value; Keyboard.enableRepeatEvents(value); }
+    public void setFocused(boolean value) { if (focused != value) characterInput.reset(); focused = value; Keyboard.enableRepeatEvents(value); }
     public boolean isFocused() { return focused; }
     public int topRow() { return topRow; }
     private int visibleRows() { return Math.max(1, (height - 8) / LINE_HEIGHT); }
@@ -40,13 +41,14 @@ public final class MultilineTextBox extends Widget
         if (layout == null || layoutText != buffer.text() || layoutWidth != width)
         {
             layoutText = buffer.text(); layoutWidth = width;
-            layout = new SourceLayout(layoutText, Math.max(1, width - 30), MultilineTextBox::advance);
+            layout = new SourceLayout(layoutText, Math.max(1, width - 14), MultilineTextBox::advance);
         }
         return layout;
     }
 
     public void edit(Runnable action)
     {
+        characterInput.reset();
         String before = buffer.text(); action.run();
         ensureCursorVisible();
         if (!before.equals(buffer.text())) changed.run();
@@ -67,7 +69,6 @@ public final class MultilineTextBox extends Widget
     {
         if (!isMouseOver() || !button.isLeft()) return false;
         setFocused(true);
-        if (NativeTextInput.isButton(getMouseX(),getMouseY(),getX()-8,getY(),width,16)) { openNativeInput(); return true; }
         if (getMouseX() >= getX() + width - 8) { scrollDragging = true; updateScrollDrag(); }
         else { buffer.select(positionAtMouse(), isShiftKeyDown()); dragging = true; }
         return true;
@@ -91,8 +92,7 @@ public final class MultilineTextBox extends Widget
     @Override public boolean keyPressed(int key, char character)
     {
         if (!focused) return false;
-        if (key == Keyboard.KEY_F4) return openNativeInput();
-        if (key == Keyboard.KEY_NONE && ChatAllowedCharacters.isAllowedCharacter(character)) { insert(Character.toString(character)); return true; }
+        if (key == Keyboard.KEY_NONE && ChatAllowedCharacters.isAllowedCharacter(character)) { String committed = characterInput.accept(character); if (!committed.isEmpty()) insert(committed); return true; }
         if (isCtrlKeyDown())
         {
             switch (key)
@@ -163,7 +163,6 @@ public final class MultilineTextBox extends Widget
                 Color4I.WHITE.draw(x + 4 + data.xAt(buffer.cursor()), lineY - 1, 1, 11);
         }
         GuiHelper.popScissor(getScreen());
-        NativeTextInput.drawButton(theme,x-8,y,w,16);
         if (maxScroll() > 0)
         {
             Color4I.rgb(0x252B32).draw(x + w - 7, y + 2, 5, h - 4);
@@ -172,16 +171,8 @@ public final class MultilineTextBox extends Widget
         }
     }
 
-    @Override public void onClosed() { dragging = scrollDragging = false; Keyboard.enableRepeatEvents(false); }
+    @Override public void onClosed() { dragging = scrollDragging = false; characterInput.reset(); Keyboard.enableRepeatEvents(false); }
 
-    public boolean openNativeInput()
-    {
-        return NativeTextInput.open(buffer.text(),true,value -> edit(() -> { buffer.selectAll(); buffer.replace(value.replace("\r\n","\n").replace('\r','\n')); }));
-    }
-
-    @Override public void addMouseOverText(java.util.List<String> list)
-    {
-        if (NativeTextInput.isButton(getMouseX(),getMouseY(),getX()-8,getY(),width,16))
-            list.add(net.minecraft.client.resources.I18n.format("ftblib.text_input.open"));
-    }
+    /** Compatibility entry point: keep editing in the original source box. */
+    @Deprecated public boolean openNativeInput() { setFocused(true); return true; }
 }

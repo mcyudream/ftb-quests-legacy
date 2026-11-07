@@ -16,6 +16,7 @@ import org.lwjgl.input.Keyboard;
 public class TextBox extends Widget
 {
 	private boolean isFocused = false;
+	private final com.feed_the_beast.ftblib.lib.util.UnicodeTextInput characterInput = new com.feed_the_beast.ftblib.lib.util.UnicodeTextInput();
 	public int charLimit = 250;
 	public Color4I textColor = Icon.EMPTY;
 
@@ -39,6 +40,7 @@ public class TextBox extends Widget
 
 	public final void setFocused(boolean v)
 	{
+		if (isFocused != v) characterInput.reset();
 		isFocused = v;
 		validText = isValid(text);
 		Keyboard.enableRepeatEvents(isFocused);
@@ -48,6 +50,7 @@ public class TextBox extends Widget
 	public void onClosed()
 	{
 		Keyboard.enableRepeatEvents(false);
+		characterInput.reset();
 	}
 
 	public final String getText()
@@ -62,6 +65,7 @@ public class TextBox extends Widget
 
 	public final void setText(String s, boolean triggerChange)
 	{
+		characterInput.reset();
 		text = s;
 
 		if (text.isEmpty())
@@ -162,7 +166,7 @@ public class TextBox extends Widget
 			lineScrollOffset = i;
 		}
 
-		int j = Math.max(1, width - (allowInput() ? 24 : 10));
+		int j = Math.max(1, width - 10);
 		Theme theme = getGui().getTheme();
 		String s = theme.trimStringToWidth(text.substring(lineScrollOffset), j);
 		int k = s.length() + lineScrollOffset;
@@ -299,11 +303,6 @@ public class TextBox extends Widget
 		{
 			setFocused(true);
 			Keyboard.enableRepeatEvents(true);
-			if (button.isLeft() && allowInput() && NativeTextInput.isButton(getMouseX(), getMouseY(), getX(), getY(), width, height))
-			{
-				openNativeInput();
-				return true;
-			}
 
 			if (button.isLeft())
 			{
@@ -338,14 +337,11 @@ public class TextBox extends Widget
 		{
 			return false;
 		}
-		else if (keyCode == Keyboard.KEY_F4 && allowInput())
-		{
-			return openNativeInput();
-		}
 		else if (keyCode == Keyboard.KEY_NONE && ChatAllowedCharacters.isAllowedCharacter(keyChar))
 		{
 			// IME commits are text events, independent of held shortcut/modifier keys.
-			writeText(Character.toString(keyChar));
+			String committed = characterInput.accept(keyChar);
+			if (!committed.isEmpty()) writeText(committed);
 			return true;
 		}
 		else if (isKeyComboCtrlA(keyCode))
@@ -488,18 +484,11 @@ public class TextBox extends Widget
 	{
 	}
 
-	public boolean openNativeInput()
+	/** Compatibility entry point: focus the original widget, without creating another window. */
+	@Deprecated public boolean openNativeInput()
 	{
-		return NativeTextInput.open(text, false, value -> {
-			if (!text.equals(value)) { setCursorPosition(text.length()); setSelectionPos(0); writeText(value); }
-			setFocused(true);
-		});
-	}
-
-	@Override public void addMouseOverText(java.util.List<String> list)
-	{
-		if (allowInput() && NativeTextInput.isButton(getMouseX(), getMouseY(), getX(), getY(), width, height))
-			list.add(net.minecraft.client.resources.I18n.format("ftblib.text_input.open"));
+		setFocused(true);
+		return allowInput();
 	}
 
 	public void onTabPressed()
@@ -514,8 +503,7 @@ public class TextBox extends Widget
 	public void draw(Theme theme, int x, int y, int w, int h)
 	{
 		drawTextBox(theme, x, y, w, h);
-		if (allowInput()) NativeTextInput.drawButton(theme, x, y, w, h);
-		w = Math.max(1, w - (allowInput() ? 14 : 0));
+		w = Math.max(1, w);
 		boolean drawGhostText = !isFocused() && text.isEmpty() && !ghostText.isEmpty();
 		String textToDraw = drawGhostText ? (TextFormatting.ITALIC + ghostText) : text;
 		GuiHelper.pushScissor(getScreen(), x, y, w, h);
