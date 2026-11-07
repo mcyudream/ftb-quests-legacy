@@ -13,4 +13,6 @@ Original authors include LatvianModder / FTB contributors and NovaEngineering co
 
 `media-api/` is a **compile-only signature SDK**, containing yudream's Media API public signatures; its source license is preserved in `media-api/LICENSE`. `mcp-server/` contains only yudream's build-time API classes. Neither SDK is a playable Mod or included in the three production JARs.
 
+`server-compat/` contains yudream's standalone exact-Cleanroom-0.4.0 dedicated-server compatibility patch. It is built from source and offered separately from the three FTB JARs; it does not bundle or modify a loader distribution.
+
 WATERMeDIA, VLC, native runtime binaries, ItemFilters and the optional Mod dependency JARs are not committed or redistributed by this source repository or its release workflow. Media API's separately installed runtime remains optional. Optional compile inputs are fetched from their original/public distributions and hash checked by `tools/bootstrap.py`.

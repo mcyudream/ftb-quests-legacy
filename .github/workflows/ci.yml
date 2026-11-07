@@ -40,8 +40,10 @@ jobs:
           path: |
             ftb-quests/build/reports/tests/
             ftb-library/build/reports/tests/
+            server-compat/build/reports/tests/
             ftb-quests/build/test-results/
             ftb-library/build/test-results/
+            server-compat/build/test-results/
   release:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     needs: build

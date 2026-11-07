@@ -16,7 +16,7 @@ Minecraft **1.12.2** · **正式 Cleanroom 0.4.0** · **Java 25**
 | `ItemFilters-1.0.4.2.jar` | 必装前置；已有相同版本时保留一份 |
 | `MediaAPI-1.0.4.jar` | 可选客户端视频 API Mod，已内置 WATERMeDIA 1.3.43；本公开发行不重新捆绑媒体运行库，按原发布渠道独立安装 |
 
-专用服务器若没有其他模组提供正式 CR 0.4.0 的 Kirino 客户端类隔离修复，另安装包中 `server-only/Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar`。客户端无需此补丁；本仓库 Ponder 已提供同项修复，安装 Ponder 的服务器也无需重复加入独立补丁。
+专用服务器若没有其他模组提供正式 CR 0.4.0 的 Kirino 客户端类隔离修复，另安装 [Release](https://github.com/mcyudream/ftb-quests-legacy/releases/latest) 中的 `Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar`。客户端无需此补丁；本仓库 Ponder 已提供同项修复，安装 Ponder 的服务器也无需重复加入独立补丁。
 
 CraftTweaker、Ponder 和视频后端均为可选依赖。验收用的 `ftbquests-acceptance.jar` 不属于安装包。不要把 `-sources.jar` 或 `-mcp.jar` 放进 mods。
 

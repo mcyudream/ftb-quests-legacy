@@ -5,4 +5,4 @@ subprojects {
   reproducibleFileOrder = true
  }
 }
-tasks.named('build') { dependsOn ':ftb-quests:build', ':ftb-library:build', ':ftb-utilities:build' }
+tasks.named('build') { dependsOn ':ftb-quests:build', ':ftb-library:build', ':ftb-utilities:build', ':server-compat:build' }

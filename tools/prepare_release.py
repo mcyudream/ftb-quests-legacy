@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify production jars and collect only the three public FTB module outputs."""
+"""Verify the three FTB modules and the optional exact-baseline server patch."""
 from pathlib import Path
 import hashlib,json,os,shutil,subprocess,zipfile
 import xml.etree.ElementTree as ET
@@ -25,12 +25,14 @@ def main():
      if module=='ftb-quests':
       raw=jar.read('com/feed_the_beast/ftbquests/FTBQuests.class')
       assert b'ftblib@[5.5.4-modern.4,)' in raw and b'after:ponder-legacy' not in raw
+     if module=='server-compat':
+      assert 'FMLCorePlugin: local.ae2addons.cleanroom040.ServerCompatibilityPlugin' in jar.read('META-INF/MANIFEST.MF').decode()
    shutil.copyfile(source,dest/source.name)
   tests=[]
   for report in (ROOT/module/'build/test-results/test').glob('TEST-*.xml'):
    e=ET.parse(report).getroot();assert all(int(e.get(k,'0'))==0 for k in ['failures','errors','skipped']);tests.append(int(e.get('tests')))
   counts[module]=sum(tests)
- assert counts['ftb-quests']>=78 and counts['ftb-library']>=10,counts
+ assert counts['ftb-quests']>=78 and counts['ftb-library']>=10 and counts['server-compat']>=2,counts
  try:commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True,stderr=subprocess.DEVNULL).strip()
  except subprocess.CalledProcessError:commit='uncommitted-local-candidate'
  record={'repository':'mcyudream/ftb-quests-legacy','commit':commit,'release':config,'tests':counts,'production_entries_sha256':entries}

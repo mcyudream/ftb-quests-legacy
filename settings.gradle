@@ -15,4 +15,4 @@ gradle.lifecycle.beforeProject { project ->
     }
 }
 rootProject.name='ftb-quests-legacy'
-include ':ftb-quests', ':ftb-library', ':ftb-utilities', ':media-api', ':mcp-server'
+include ':ftb-quests', ':ftb-library', ':ftb-utilities', ':server-compat', ':media-api', ':mcp-server'

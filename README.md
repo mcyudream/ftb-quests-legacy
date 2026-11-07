@@ -21,6 +21,8 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 
 只有 `-sources.jar` 后缀的文件为源码，不放进 mods。此仓库的 `media-api` / `mcp-server` 项目是编译接口，不能装进游戏。
 
+正式 CR 0.4.0 专用服务器若未安装 Ponder 或同等 Kirino 客户端隔离修复，请额外安装 Release 中的 `Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar`。这是本次专服验收实际使用的加载器补丁；只在版本精确为 0.4.0 的专服启用。客户端无需安装。源码与说明见 [server-compat](server-compat/README.md)。
+
 Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可选，分别安装对应运行 Mod；[Ponder Legacy](https://github.com/mcyudream/ponder-legacy/releases) 无需随任务系统重复捆绑。公开发行的三个 FTB JAR 不内嵌媒体运行库，已有 Media API 的视频接入继续保留。
 
 ## 本版要点
@@ -42,7 +44,7 @@ python3 tools/prepare_release.py
 
 使用 Java 25 和 Python 3.11+。依赖按锁文件下载并校验 SHA-256，缓存位于 `.build-deps/`；不依赖维护者的同级工作目录。Cleanroom 编译 SDK 与最低运行基线分别声明；较新的 SDK 不提高最低加载器版本。
 
-CI 在 main、PR、手动运行时构建三个模块、执行 Quests／Library 单元测试、重混淆、检查产物并保存 JAR／源码包／测试报告。推送与 `release.json` 一致的 `v*` 标签后，在通过构建和验证后自动发布 **非预览** GitHub Release。`SHA256SUMS` 校验下载文件，`BUILD-INFO.json` 记录提交与内容摘要。
+CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁、执行 Quests／Library／补丁单元测试、重混淆、检查产物并保存 JAR／源码包／测试报告。推送与 `release.json` 一致的 `v*` 标签后，在通过构建和验证后自动发布 **非预览** GitHub Release。`SHA256SUMS` 校验下载文件，`BUILD-INFO.json` 记录提交与内容摘要。
 
 ## 验证范围
 
