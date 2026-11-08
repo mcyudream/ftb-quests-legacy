@@ -1,5 +1,7 @@
 # modern.20 物品搜索延迟修复
 
+[modern.20 正式版下载](https://github.com/mcyudream/ftb-quests-legacy/releases/tag/v1202.10.0-modern.20) · [发布文件校验](published.json)
+
 ## 根因与修复
 
 旧选择器每次输入都在搜索线程对全部名称调用 `PinyinSearch.key()`，共享 LRU 仅能保存 32768 个名称。更多不同中文名称按同一顺序遍历时，命中前的旧条目会被不断淘汰，导致每次查询都重新运行 ICU。中文／注册名查询也走同一条慢路径。此外，每次物品索引发布都会把整个旧快照再次送去预热，输入又先清空列表并等待 200 毫秒。
@@ -24,6 +26,8 @@
 
 ## 云端产物
 
-[源码 CI](https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42483829959) 的构建、106 项单元测试和 Windows 原生文件锁／IME 上下文检查均通过：[Windows 存储输出](windows-storage.txt)、[Windows IME 输出](windows-ime.txt)。
+[源码 CI](https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42483829959) 的构建、106 项单元测试和 Windows 原生文件锁／IME 上下文检查均通过。[标签 CI](https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42484161059) 的同一组检查和发布也全部通过：[Windows 存储输出](windows-storage.txt)、[Windows IME 输出](windows-ime.txt)。
 
 四个生产 JAR 已从云端下载并校验；再用这些实际文件运行正式 CR 0.4.0 的搜索压力、编辑器／背包及专服回归，全部 `FUNCTIONAL_PASS`、退出码 0。上面的运行结果及耗时来自这批云端文件，SHA-256 见 [下载校验记录](cloud-build.json)。
+
+正式版为非草稿、非预览的 latest Release；11 个资产已全部下载并检查大小、GitHub 资产摘要与 `SHA256SUMS`。四个生产 JAR 与实际游戏验收文件的 SHA-256 完全一致，见 [published.json](published.json)。
