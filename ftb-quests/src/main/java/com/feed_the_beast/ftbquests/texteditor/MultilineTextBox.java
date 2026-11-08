@@ -8,11 +8,11 @@ import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
 
 /** In-game source editor with selection, wrapping, scrolling and local undo. */
-public final class MultilineTextBox extends Widget
+public final class MultilineTextBox extends Widget implements FocusableTextInput
 {
     public final EditorBuffer buffer;
     private final Runnable changed, paste;
-    private boolean focused = true, dragging, scrollDragging;
+    private boolean focused, dragging, scrollDragging;
     private final com.feed_the_beast.ftblib.lib.util.UnicodeTextInput characterInput = new com.feed_the_beast.ftblib.lib.util.UnicodeTextInput();
     private SourceLayout layout;
     private String layoutText;
@@ -24,7 +24,12 @@ public final class MultilineTextBox extends Widget
         super(panel); buffer = new EditorBuffer(text); this.changed = changed; this.paste = paste;
     }
 
-    public void setFocused(boolean value) { if (focused != value) characterInput.reset(); focused = value; Keyboard.enableRepeatEvents(value); }
+    public void setFocused(boolean value) {
+        if (focused != value) characterInput.reset();
+        focused = value;
+        if (!value) dragging = scrollDragging = false;
+        getGui().onTextInputFocusChanged(this, value);
+    }
     public boolean isFocused() { return focused; }
     public int topRow() { return topRow; }
     private int visibleRows() { return Math.max(1, (height - 8) / LINE_HEIGHT); }
@@ -32,6 +37,7 @@ public final class MultilineTextBox extends Widget
     private static int advance(int c)
     {
         if (c == '\t') return 16;
+        if (Character.isSupplementaryCodePoint(c)) return Minecraft.getMinecraft().fontRenderer.getStringWidth(new String(Character.toChars(c)));
         int width = Minecraft.getMinecraft().fontRenderer.getCharWidth((char)c);
         return width < 0 ? 6 : width;
     }
@@ -151,12 +157,13 @@ public final class MultilineTextBox extends Widget
         {
             SourceLayout.Row row = data.rows.get(index); int lineY = y + 4 + (index - topRow) * LINE_HEIGHT, pixel = 0;
             int selectionStart = buffer.start(), selectionEnd = buffer.end();
-            for (int at = row.start(); at < row.end(); at++)
+            for (int at = row.start(); at < row.end();)
             {
-                char c = buffer.text().charAt(at); int size = advance(c);
+                int c = buffer.text().codePointAt(at), size = advance(c);
                 if (at >= selectionStart && at < selectionEnd) Color4I.rgb(0x315D7B).draw(x + 4 + pixel, lineY - 1, size, LINE_HEIGHT);
-                if (c != '\t') theme.drawString(Character.toString(c), x + 4 + pixel, lineY, Color4I.WHITE, 0);
+                if (c != '\t') theme.drawString(new String(Character.toChars(c)), x + 4 + pixel, lineY, Color4I.WHITE, 0);
                 pixel += size;
+                at += Character.charCount(c);
             }
             if (row.end() >= selectionStart && row.end() < selectionEnd) Color4I.rgb(0x315D7B).draw(x + 4 + pixel, lineY - 1, 4, LINE_HEIGHT);
             if (focused && data.rowAt(buffer.cursor()) == index && Minecraft.getSystemTime() % 1000 < 600)
@@ -171,7 +178,7 @@ public final class MultilineTextBox extends Widget
         }
     }
 
-    @Override public void onClosed() { dragging = scrollDragging = false; characterInput.reset(); Keyboard.enableRepeatEvents(false); }
+    @Override public void onClosed() { setFocused(false); characterInput.reset(); }
 
     /** Compatibility entry point: keep editing in the original source box. */
     @Deprecated public boolean openNativeInput() { setFocused(true); return true; }

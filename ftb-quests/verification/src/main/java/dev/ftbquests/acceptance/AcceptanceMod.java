@@ -16,7 +16,8 @@ public final class AcceptanceMod
     {
         if (event.getSide().isClient())
         {
-            if (Boolean.getBoolean("ftbquests.acceptance.input")) AcceptanceInput.install();
+            if (Boolean.getBoolean("ftbquests.acceptance.focus")) AcceptanceEditorFocus.install();
+            else if (Boolean.getBoolean("ftbquests.acceptance.input")) AcceptanceInput.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.animation")) AcceptanceAnimation.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.creation")) AcceptanceCreation.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.douyin")) AcceptanceDouyin.install();

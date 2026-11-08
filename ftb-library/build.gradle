@@ -1,6 +1,6 @@
 plugins { id 'java-library'; id 'com.cleanroommc.cleanroomgradle' }
 group = 'com.feed_the_beast.mods'
-version = '5.5.4-modern.5'
+version = '5.5.4-modern.6'
 base.archivesName = 'FTB-Library-NovaEng'
 java { toolchain.languageVersion = JavaLanguageVersion.of(25); withSourcesJar() }
 repositories { mavenCentral(); maven { url = 'https://maven.cleanroommc.com' }; flatDir { dirs rootProject.file('.build-deps') } }

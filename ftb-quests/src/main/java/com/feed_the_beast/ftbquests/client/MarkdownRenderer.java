@@ -48,10 +48,11 @@ public final class MarkdownRenderer
                             Color4I.rgb(0x18222B).draw(x, y, w, h); int rowY = y + 4;
                             for (SourceLayout.Row row : code.rows) {
                                 int pixel = x + 4;
-                                for (int i = row.start(); i < row.end(); i++) {
-                                    char c = block.text().charAt(i);
-                                    if (c != '\t') theme.drawString(Character.toString(c), pixel, rowY, Color4I.rgb(0xC4DAE9), 0);
+                                for (int i = row.start(); i < row.end();) {
+                                    int c = block.text().codePointAt(i);
+                                    if (c != '\t') theme.drawString(new String(Character.toChars(c)), pixel, rowY, Color4I.rgb(0xC4DAE9), 0);
                                     pixel += advance(c);
+                                    i += Character.charCount(c);
                                 }
                                 rowY += 11;
                             }
@@ -98,7 +99,11 @@ public final class MarkdownRenderer
         }
     }
 
-    private static int advance(int c) { return c == '\t' ? 16 : Math.max(c == '§' ? 6 : 0, Minecraft.getMinecraft().fontRenderer.getCharWidth((char)c)); }
+    private static int advance(int c) {
+        if (c == '\t') return 16;
+        if (Character.isSupplementaryCodePoint(c)) return Minecraft.getMinecraft().fontRenderer.getStringWidth(new String(Character.toChars(c)));
+        return Math.max(c == '§' ? 6 : 0, Minecraft.getMinecraft().fontRenderer.getCharWidth((char)c));
+    }
 
     private static ITextComponent inline(String text)
     {

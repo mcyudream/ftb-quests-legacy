@@ -104,6 +104,24 @@ class TextEditorTest
         assertEquals(8, layout.positionAt(50, 0));
     }
 
+    @Test void wrappedRowsAndMouseClicksNeverSplitSupplementaryHan()
+    {
+        SourceLayout layout = new SourceLayout("A𠀀B", 12, point -> 6);
+        assertEquals(List.of(new SourceLayout.Row(0, 3), new SourceLayout.Row(3, 4)), layout.rows);
+        for (int row = 0; row < layout.rows.size(); row++)
+            for (int x = 0; x < 30; x++) assertNotEquals(2, layout.positionAt(row, x));
+        assertEquals(6, layout.xAt(1));
+    }
+
+    @Test void selectionInsideSupplementaryHanKeepsCopyReplaceAndUndoWhole()
+    {
+        EditorBuffer buffer = new EditorBuffer("A𠀀B");
+        buffer.select(2, false); buffer.select(3, true);
+        assertEquals("𠀀", buffer.selected());
+        buffer.replace("中"); assertEquals("A中B", buffer.text());
+        buffer.undo(); assertEquals("A𠀀B", buffer.text()); assertEquals("𠀀", buffer.selected());
+    }
+
     @Test void markdownBlocksCoverListsQuotesMediaTablesAndLiteralCode()
     {
         String text = "# 标题\n- 项目\n1. 步骤\n> 引用\n---\n![图](asset:demo.png)\n| A | B |\n| --- | :---: |\n| C\\|D | E |\n```zs\n\n**literal**\n```\n{\"type\":\"item\",\"item\":\"minecraft:stone\"}";

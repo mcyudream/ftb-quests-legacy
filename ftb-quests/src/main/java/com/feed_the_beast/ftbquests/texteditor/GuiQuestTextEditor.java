@@ -25,7 +25,7 @@ public final class GuiQuestTextEditor extends GuiBase
     private String savedTitle, savedSubtitle, status = "";
     private List<String> savedLines;
     private DescriptionDocument document;
-    private boolean markdown, previewOnly;
+    private boolean markdown, previewOnly, focusInitialized;
     private final TextBox title, subtitle;
     public final MultilineTextBox source;
     public final Panel preview;
@@ -68,8 +68,8 @@ public final class GuiQuestTextEditor extends GuiBase
         };
         previewScroll = new PanelScrollBar(this, preview);
         mode = button("", () -> { markdown = !markdown; modeTitle(); changed(); focusSource(); }); modeTitle();
-        showSource = button(tr("source"), () -> { previewOnly = false; refreshWidgets(); });
-        showPreview = button(tr("preview"), () -> { previewOnly = true; refreshWidgets(); });
+        showSource = button(tr("source"), () -> { previewOnly = false; refreshWidgets(); focusSource(); });
+        showPreview = button(tr("preview"), () -> { previewOnly = true; if (width < 460) source.setFocused(false); refreshWidgets(); });
         help = button("?", this::showHelp);
         save = button(tr("save"), () -> save(true)); cancel = button(I18n.format("gui.cancel"), this::onBack);
         toolbar("heading", () -> prefix("# "));
@@ -110,7 +110,10 @@ public final class GuiQuestTextEditor extends GuiBase
         button.setHeight(18); toolbar.add(button);
     }
     private void modeTitle() { mode.setTitle(tr(markdown ? "mode_markdown" : "mode_legacy")); mode.setWidth(144); }
-    private void focusSource() { title.setFocused(false); subtitle.setFocused(false); source.setFocused(true); }
+    private void focusSource() {
+        if (previewOnly && width < 460) { previewOnly = false; refreshWidgets(); }
+        source.setFocused(true);
+    }
     private void changed() { previewDelay = 3; status = ""; }
     public List<String> draftLines() {
         if (encodedText != source.buffer.text() || encodedMarkdown != markdown || encodedDocument != document) {
@@ -161,7 +164,9 @@ public final class GuiQuestTextEditor extends GuiBase
         // Leave room for the panel's four-pixel padding on either side.
         preview.refreshWidgets(); previewDelay = 0;
         save.setPosAndSize(width - 158, height - 26, 82, 18); cancel.setPosAndSize(width - 72, height - 26, 64, 18);
-        source.setFocused(!previewOnly);
+        // Relayout must preserve the selected field instead of stealing focus for the body.
+        if (!focusInitialized) { focusInitialized = true; if (!previewOnly) focusSource(); }
+        else if (!widgets.contains(source)) source.setFocused(false);
     }
 
     @Override public void tick()
@@ -195,7 +200,9 @@ public final class GuiQuestTextEditor extends GuiBase
         if (key == Keyboard.KEY_TAB && !source.isFocused()) {
             boolean wasTitle = title.isFocused(); title.setFocused(false); subtitle.setFocused(wasTitle); source.setFocused(!wasTitle); return true;
         }
-        return super.keyPressed(key, character);
+        // Never let an old sibling focus flag consume a committed character.
+        FocusableTextInput input = getFocusedTextInput();
+        return input instanceof Widget && widgets.contains(input) && ((Widget) input).keyPressed(key, character);
     }
     @Override public boolean onClosedByKey(int key) { return false; }
     @Override public void onBack()
@@ -204,7 +211,7 @@ public final class GuiQuestTextEditor extends GuiBase
         List<ContextMenuItem> options = new ArrayList<>();
         options.add(new ContextMenuItem(tr("save"), GuiIcons.ACCEPT, () -> save(true)));
         options.add(new ContextMenuItem(tr("discard"), GuiIcons.CANCEL, () -> closeGui(true)));
-        options.add(new ContextMenuItem(tr("continue"), Icon.EMPTY, () -> source.setFocused(true)));
+        options.add(new ContextMenuItem(tr("continue"), Icon.EMPTY, this::focusSource));
         openContextMenu(options);
     }
 
@@ -279,7 +286,7 @@ public final class GuiQuestTextEditor extends GuiBase
         new GuiDescriptionComponent(json, edited -> {
             if (replace) source.edit(() -> source.buffer.replaceRange(from, to, edited.toString()));
             else insertLine(edited.toString());
-            openGui(); source.setFocused(true);
+            openGui(); focusSource();
         }).openGui();
     }
 

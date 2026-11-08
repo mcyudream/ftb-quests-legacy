@@ -12,6 +12,11 @@ def main():
  dest.mkdir(parents=True)
  if os.environ.get('GITHUB_REF_TYPE')=='tag' and os.environ.get('GITHUB_REF_NAME')!=config['tag']:raise SystemExit('Release tag does not match release.json')
  if config['prerelease'] is not False:raise SystemExit('This release must be stable')
+ library_name=config['modules']['ftb-library'];library_version=library_name.removeprefix('FTB-Library-NovaEng-')
+ assert library_version!=library_name,library_name
+ with zipfile.ZipFile(ROOT/'ftb-library/build/libs'/(library_name+'.jar')) as library:
+  assert library_version.encode() in library.read('com/feed_the_beast/ftblib/Tags.class')
+ required_library=('ftblib@['+library_version+',)').encode()
  counts={};entries={}
  for module,name in config['modules'].items():
   for suffix in ['', '-sources']:
@@ -26,7 +31,7 @@ def main():
      assert 'ModType: CRL' in jar.read('META-INF/MANIFEST.MF').decode()
      if module=='ftb-quests':
       raw=jar.read('com/feed_the_beast/ftbquests/FTBQuests.class')
-      assert b'ftblib@[5.5.4-modern.5,)' in raw and b'after:ponder-legacy' not in raw
+      assert required_library in raw and b'after:ponder-legacy' not in raw
      if module=='ftb-library':
       assert all(b'java/awt/Dialog' not in jar.read(p) for p in paths if p.startswith('com/feed_the_beast/ftblib/lib/gui/NativeTextInput') and p.endswith('.class'))
      if module=='server-compat':
@@ -36,7 +41,7 @@ def main():
   for report in (ROOT/module/'build/test-results/test').glob('TEST-*.xml'):
    e=ET.parse(report).getroot();assert all(int(e.get(k,'0'))==0 for k in ['failures','errors','skipped']);tests.append(int(e.get('tests')))
   counts[module]=sum(tests)
- assert counts['ftb-quests']>=87 and counts['ftb-library']>=13 and counts['server-compat']>=2,counts
+ assert counts['ftb-quests']>=89 and counts['ftb-library']>=13 and counts['server-compat']>=2,counts
  try:commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True,stderr=subprocess.DEVNULL).strip()
  except subprocess.CalledProcessError:commit='uncommitted-local-candidate'
  record={'repository':'mcyudream/ftb-quests-legacy','commit':commit,'release':config,'tests':counts,'production_entries_sha256':entries}

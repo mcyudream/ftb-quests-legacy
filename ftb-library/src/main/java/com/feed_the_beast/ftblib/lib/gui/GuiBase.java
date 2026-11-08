@@ -55,7 +55,55 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 	private ScaledResolution screen;
 	public boolean fixUnicode;
 	private GuiScreen prevScreen;
+	private FocusableTextInput focusedTextInput;
 	public Panel contextMenu = null;
+
+	public final FocusableTextInput getFocusedTextInput()
+	{
+		return focusedTextInput;
+	}
+
+	/** Called by text widgets after updating their own focus flag. */
+	public final void onTextInputFocusChanged(FocusableTextInput input, boolean focused)
+	{
+		if (focused)
+		{
+			FocusableTextInput previous = focusedTextInput;
+			focusedTextInput = input;
+			if (previous != null && previous != input) previous.setFocused(false);
+		}
+		else if (focusedTextInput == input)
+		{
+			focusedTextInput = null;
+		}
+		updateKeyboardRepeatEvents();
+	}
+
+	private boolean hasTextInputFocus()
+	{
+		return contextMenu instanceof GuiBase ? ((GuiBase) contextMenu).hasTextInputFocus() : focusedTextInput != null;
+	}
+
+	private static void updateKeyboardRepeatEvents()
+	{
+		GuiScreen active = Minecraft.getMinecraft().currentScreen;
+		if (active instanceof IGuiWrapper) Keyboard.enableRepeatEvents(((IGuiWrapper) active).getGui().hasTextInputFocus());
+		else if (active == null) Keyboard.enableRepeatEvents(false);
+	}
+
+	private void clearTextInputFocus()
+	{
+		if (focusedTextInput != null) focusedTextInput.setFocused(false);
+	}
+
+	private static boolean containsWidget(Panel panel, Widget target)
+	{
+		for (Widget widget : panel.widgets)
+		{
+			if (widget == target || widget instanceof Panel && containsWidget((Panel) widget, target)) return true;
+		}
+		return false;
+	}
 
 	public GuiBase()
 	{
@@ -96,6 +144,7 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 			alignWidgets();
 			onPostInit();
 		}
+		updateKeyboardRepeatEvents();
 	}
 
 	public Theme getTheme()
@@ -226,6 +275,7 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 		{
 			super.refreshWidgets();
 			refreshWidgets = false;
+			if (focusedTextInput instanceof Widget && !containsWidget(this, (Widget) focusedTextInput)) clearTextInputFocus();
 		}
 
 		posX = getX();
@@ -249,6 +299,9 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 	@Override
 	public void updateMouseOver(int mouseX, int mouseY)
 	{
+		// Mouse events can arrive before drawScreen: caret placement must use the event's coordinates.
+		this.mouseX = mouseX;
+		this.mouseY = mouseY;
 		isMouseOver = checkMouseOver(mouseX, mouseY);
 		setOffset(true);
 
@@ -292,6 +345,8 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 			return;
 		}
 
+		clearTextInputFocus();
+
 		int x = getX();
 		int y = getY();
 
@@ -332,6 +387,7 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 	@Override
 	public void onClosed()
 	{
+		clearTextInputFocus();
 		super.onClosed();
 		closeContextMenu();
 	}
@@ -354,6 +410,8 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 	@Override
 	public boolean mousePressed(MouseButton button)
 	{
+		// A button or another panel may consume the event before the old text box sees it.
+		if (focusedTextInput instanceof Widget && !((Widget) focusedTextInput).isMouseOver()) clearTextInputFocus();
 		if (button == MouseButton.BACK)
 		{
 			closeGui(true);

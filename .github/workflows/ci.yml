@@ -24,7 +24,7 @@ jobs:
       - name: Fetch and verify locked compile dependencies
         run: python3 tools/bootstrap.py
       - name: Build, test and reobfuscate all public modules
-        run: bash gradlew --no-daemon :build --console=plain
+        run: bash gradlew --no-daemon :build :ftb-quests:reobfAcceptanceJar --console=plain
       - name: Audit production jars and collect release files
         run: python3 tools/prepare_release.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

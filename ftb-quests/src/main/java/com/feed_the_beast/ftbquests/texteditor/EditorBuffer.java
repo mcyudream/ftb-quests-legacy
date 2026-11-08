@@ -26,6 +26,7 @@ public final class EditorBuffer
     public void select(int position, boolean extend)
     {
         cursor = Math.clamp(position, 0, text.length());
+        if (cursor > 0 && cursor < text.length() && Character.isSurrogatePair(text.charAt(cursor - 1), text.charAt(cursor))) cursor--;
         if (!extend) anchor = cursor;
     }
 

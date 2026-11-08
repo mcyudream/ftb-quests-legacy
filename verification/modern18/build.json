@@ -1,0 +1,31 @@
+{
+  "tests": {
+    "ftb-quests": {
+      "tests": 89,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ftb-library": {
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "server-compat": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "tested_jars": {
+    "FTBQuests-1202.10.0-modern.18.jar": "698aa4f855955001a40b88902a0326dd4853f3e58750f34634e5f3c99b85f200",
+    "FTB-Library-NovaEng-5.5.4-modern.6.jar": "0d05bc90b671eff37985b628dbbf848a4d98e3c9eceeefad236c7c0a5aabe651",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "2583ed057b5be85b05ff419d0ceef9463eed55c2b76171d9ad18358de19c727b"
+  },
+  "cleanroom": "0.4.0",
+  "userdev": false,
+  "client_process_left_running": true,
+  "native_ime_engine_keystrokes_not_automated": true
+}

@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "cleanroom": "0.4.0",
+  "detail": "Wrapper mouse clicks; exact body line; exclusive title/subtitle/body focus; relayout; preview; Chinese network and disk roundtrip",
+  "video": false,
+  "ponder": false,
+  "zs": false
+}

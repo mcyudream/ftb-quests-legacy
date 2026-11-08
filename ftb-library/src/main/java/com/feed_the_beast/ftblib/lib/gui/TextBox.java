@@ -13,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.input.Keyboard;
 
-public class TextBox extends Widget
+public class TextBox extends Widget implements FocusableTextInput
 {
 	private boolean isFocused = false;
 	private final com.feed_the_beast.ftblib.lib.util.UnicodeTextInput characterInput = new com.feed_the_beast.ftblib.lib.util.UnicodeTextInput();
@@ -43,13 +43,13 @@ public class TextBox extends Widget
 		if (isFocused != v) characterInput.reset();
 		isFocused = v;
 		validText = isValid(text);
-		Keyboard.enableRepeatEvents(isFocused);
+		getGui().onTextInputFocusChanged(this, v);
 	}
 
 	@Override
 	public void onClosed()
 	{
-		Keyboard.enableRepeatEvents(false);
+		setFocused(false);
 		characterInput.reset();
 	}
 
@@ -76,9 +76,9 @@ public class TextBox extends Widget
 		}
 
 		validText = isValid(s);
-		cursorPosition = Math.min(cursorPosition, text.length());
-		selectionEnd = Math.min(selectionEnd, text.length());
-		lineScrollOffset = Math.min(lineScrollOffset, text.length());
+		cursorPosition = characterPosition(cursorPosition);
+		selectionEnd = characterPosition(selectionEnd);
+		lineScrollOffset = characterPosition(lineScrollOffset);
 
 		if (validText && triggerChange)
 		{
@@ -93,10 +93,21 @@ public class TextBox extends Widget
 
 	public void setCursorPosition(int pos)
 	{
-		cursorPosition = pos;
-		int i = text.length();
-		cursorPosition = MathHelper.clamp(cursorPosition, 0, i);
+		cursorPosition = characterPosition(pos);
 		setSelectionPos(cursorPosition);
+	}
+
+	private int characterPosition(int position)
+	{
+		position = MathHelper.clamp(position, 0, text.length());
+		if (position > 0 && position < text.length() && Character.isSurrogatePair(text.charAt(position - 1), text.charAt(position))) position--;
+		return position;
+	}
+
+	private int nextCharacter(int direction)
+	{
+		return direction < 0 ? (selectionEnd == 0 ? 0 : text.offsetByCodePoints(selectionEnd, -1))
+				: (selectionEnd == text.length() ? selectionEnd : text.offsetByCodePoints(selectionEnd, 1));
 	}
 
 	public void moveCursorBy(int num)
@@ -159,7 +170,7 @@ public class TextBox extends Widget
 			position = 0;
 		}
 
-		selectionEnd = position;
+		selectionEnd = position = characterPosition(position);
 
 		if (lineScrollOffset > i)
 		{
@@ -185,7 +196,7 @@ public class TextBox extends Widget
 			lineScrollOffset -= lineScrollOffset - position;
 		}
 
-		lineScrollOffset = MathHelper.clamp(lineScrollOffset, 0, i);
+		lineScrollOffset = characterPosition(lineScrollOffset);
 	}
 
 	public int getNthWordFromCursor(int numWords)
@@ -302,7 +313,6 @@ public class TextBox extends Widget
 		if (isMouseOver())
 		{
 			setFocused(true);
-			Keyboard.enableRepeatEvents(true);
 
 			if (button.isLeft())
 			{
@@ -323,7 +333,6 @@ public class TextBox extends Widget
 		}
 		else
 		{
-			Keyboard.enableRepeatEvents(false);
 			setFocused(false);
 		}
 
@@ -399,7 +408,7 @@ public class TextBox extends Widget
 						}
 						else
 						{
-							setSelectionPos(selectionEnd - 1);
+							setSelectionPos(nextCharacter(-1));
 						}
 					}
 					else if (isCtrlKeyDown())
@@ -408,7 +417,7 @@ public class TextBox extends Widget
 					}
 					else
 					{
-						moveCursorBy(-1);
+						setCursorPosition(nextCharacter(-1));
 					}
 					return true;
 				case Keyboard.KEY_RIGHT:
@@ -420,7 +429,7 @@ public class TextBox extends Widget
 						}
 						else
 						{
-							setSelectionPos(selectionEnd + 1);
+							setSelectionPos(nextCharacter(1));
 						}
 					}
 					else if (isCtrlKeyDown())
@@ -429,7 +438,7 @@ public class TextBox extends Widget
 					}
 					else
 					{
-						moveCursorBy(1);
+						setCursorPosition(nextCharacter(1));
 					}
 					return true;
 				case Keyboard.KEY_END:
