@@ -9,5 +9,5 @@
   "runtime_file": "ponder-legacy-1.5.0.jar",
   "runtime_sha256": "bf668461d714313326ecf095614b58eee5b6fa5e5317c7ee5cb5de3bd92176d6",
   "sdk_mapping": "searge (deobfuscated by CleanroomGradle)",
-  "sdk_url": "https://github.com/mcyudream/ponder-legacy/releases/download/v1.5.0/ponder-legacy-1.5.0.jar"
+  "sdk_url": "https://api.github.com/repos/mcyudream/ponder-legacy/releases/assets/717839943"
 }

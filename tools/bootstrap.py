@@ -2,7 +2,7 @@
 """Fetch SHA-256 pinned compile inputs into a repository-local, ignored cache."""
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-import hashlib,json,time,urllib.request,os
+import hashlib,json,time,urllib.request,urllib.parse,os
 ROOT=Path(__file__).resolve().parents[1]
 CACHE=ROOT/'.build-deps'
 def sha(path):
@@ -13,7 +13,9 @@ def fetch(entry):
  partial=target.with_name(target.name+'.part')
  for attempt in range(3):
   try:
-   req=urllib.request.Request(entry['url'],headers={'User-Agent':'FTB-Quests-Legacy-build'})
+   headers={'User-Agent':'FTB-Quests-Legacy-build'}
+   if urllib.parse.urlsplit(entry['url']).hostname=='api.github.com':headers['Accept']='application/octet-stream'
+   req=urllib.request.Request(entry['url'],headers=headers)
    with urllib.request.urlopen(req,timeout=45) as response,partial.open('wb') as out:
     while data:=response.read(131072):out.write(data)
    if sha(partial)!=entry['sha256']:raise ValueError('SHA-256 mismatch: '+target.name)
