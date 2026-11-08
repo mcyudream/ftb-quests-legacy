@@ -30,3 +30,7 @@ Windows CI 使用下载后校验 SHA-256 的正式 CR 0.4.0、JNA 和 JNA Platfo
 - [构建记录](build.json)：104 项单元测试通过，零失败、零跳过；[客户端](client/runtime.json) 和 [专服](server/runtime.json) 记录实际运行 JAR 的 SHA-256。
 
 使用用户任务书的独立副本（22 个章节、621 个任务），未修改原实例。客户端自动化完成后正常退出。
+
+## 云端产物
+
+[源码 CI](https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42464868801) 的构建、104 项测试、Windows 原生文件锁和 IME 检查均通过。已下载并校验云端四个生产 JAR，再使用这些实际文件在正式 CR 0.4.0 客户端和专服重跑上述回归，均为 `FUNCTIONAL_PASS`、退出码 0；上方运行文件与结果记录的就是这批云端产物。[下载校验记录](cloud-build.json) 记录其 SHA-256。

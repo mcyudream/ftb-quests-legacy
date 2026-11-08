@@ -20,7 +20,7 @@
     }
   },
   "tested_jars": {
-    "FTBQuests-1202.10.0-modern.19.jar": "0aab9ca039043bcf833e8aadc41dac4d9c371b94963c3814fccfc6ba629bf553",
+    "FTBQuests-1202.10.0-modern.19.jar": "c0d7a3b6a3e6ab9845809999f742f5bfad5d2b63d42b63e0727abe19c66f112f",
     "FTB-Library-NovaEng-5.5.4-modern.7.jar": "4a241f1835739087b47b1d1790b126f4790fa22ad339b833a3baeb575c9b1c45",
     "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "91781f18755cfdaa0972fdda74a3eff43eae4f9cdd56f6def11d35b1eaec0155",
     "Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar": "ab21b0b5940e83190cf84a9eb7f266332b7358e1942968b1213fe32260660bbb"
@@ -29,5 +29,10 @@
   "userdev": false,
   "client_exit": 0,
   "server_exit": 0,
-  "native_ime_engine_keystrokes_not_automated": true
+  "native_ime_engine_keystrokes_not_automated": true,
+  "runtime_cases": [
+    "ftb-nova-ime19-ci-r1-040/client",
+    "ftb-nova-ime19-ci-server-r1-040/server"
+  ],
+  "production_source": "GitHub Actions 42464868801 downloaded artifacts"
 }

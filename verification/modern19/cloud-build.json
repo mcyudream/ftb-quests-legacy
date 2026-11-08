@@ -1,0 +1,19 @@
+{
+  "run": 42464868801,
+  "artifact": 13611650996,
+  "artifact_sha256": "06031f22e88c2f01a01d24a6563aa4425f33d19bb3e888b96214eb341056a42b",
+  "commit": "556c9427300f7f71f87e0e9a69bb0ee15a395cda",
+  "tests": {
+    "ftb-quests": 89,
+    "ftb-library": 13,
+    "ftb-utilities": 0,
+    "server-compat": 2
+  },
+  "production_sha256": {
+    "FTB-Library-NovaEng-5.5.4-modern.7.jar": "4a241f1835739087b47b1d1790b126f4790fa22ad339b833a3baeb575c9b1c45",
+    "Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar": "ab21b0b5940e83190cf84a9eb7f266332b7358e1942968b1213fe32260660bbb",
+    "FTBQuests-1202.10.0-modern.19.jar": "c0d7a3b6a3e6ab9845809999f742f5bfad5d2b63d42b63e0727abe19c66f112f",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "91781f18755cfdaa0972fdda74a3eff43eae4f9cdd56f6def11d35b1eaec0155"
+  },
+  "matches_local_runtime_sha256": true
+}

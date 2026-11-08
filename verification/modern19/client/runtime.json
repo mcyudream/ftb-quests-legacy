@@ -4,7 +4,7 @@
   "userdev": false,
   "installer_sha256": "882435d851a51e14b802e0a9384e4a05cfbb3890fca435c40c494af75e5a166f",
   "jars": {
-    "FTBQuests-1202.10.0-modern.19.jar": "0aab9ca039043bcf833e8aadc41dac4d9c371b94963c3814fccfc6ba629bf553",
+    "FTBQuests-1202.10.0-modern.19.jar": "c0d7a3b6a3e6ab9845809999f742f5bfad5d2b63d42b63e0727abe19c66f112f",
     "FTB-Library-NovaEng-5.5.4-modern.7.jar": "4a241f1835739087b47b1d1790b126f4790fa22ad339b833a3baeb575c9b1c45",
     "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "91781f18755cfdaa0972fdda74a3eff43eae4f9cdd56f6def11d35b1eaec0155",
     "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
@@ -131,7 +131,7 @@
     "--version",
     "Cleanroom-0.4.0",
     "--gameDir",
-    "/home/yudream/code/mods/.dev/ae2-addons-verification/ftb-nova-ime19-fixed-r3-040/client",
+    "/home/yudream/code/mods/.dev/ae2-addons-verification/ftb-nova-ime19-ci-r1-040/client",
     "--assetsDir",
     "/home/yudream/.gradle/caches/cleanroom_gradle/assets",
     "--assetIndex",
