@@ -1,6 +1,8 @@
 package com.feed_the_beast.ftblib.lib.gui.misc;
 
 import com.feed_the_beast.ftblib.FTBLib;
+import com.feed_the_beast.ftblib.client.CreativeItemIndex;
+import com.feed_the_beast.ftblib.lib.util.PinyinSearch;
 import com.feed_the_beast.ftblib.lib.config.ConfigInt;
 import com.feed_the_beast.ftblib.lib.config.ConfigItemStack;
 import com.feed_the_beast.ftblib.lib.config.ConfigNBT;
@@ -161,7 +163,7 @@ public class GuiSelectItemStack extends GuiBase
 		{
 			GuiHelper.playClickSound();
 			allItems = !allItems;
-			panelStacks.refreshWidgets();
+			requestSearch();
 		}
 	}
 
@@ -375,42 +377,49 @@ public class GuiSelectItemStack extends GuiBase
 		}
 	}
 
-	private record SearchEntry(ItemStack stack, String name, String mod) {}
+	private record SearchResult(ThreadItemList request, List<ItemStack> items) {}
 	private class ThreadItemList extends Thread
 	{
 		private final String search;
-		private final List<SearchEntry> entries = new ArrayList<>();
+		private final boolean catalog;
+		private final List<CreativeItemIndex.SearchEntry> entries;
 		public ThreadItemList()
 		{
 			super("Item Search Thread");
 			setDaemon(true);
 			search = searchBox.getText().toLowerCase(java.util.Locale.ROOT);
-			List<ItemStack> stacks = new ArrayList<>();
-			if (allItems) stacks.addAll(com.feed_the_beast.ftblib.client.CreativeItemIndex.snapshot());
-			else if (Minecraft.getMinecraft().player != null)
+			catalog = allItems;
+			if (catalog) entries = CreativeItemIndex.searchEntries();
+			else
 			{
-				var inventory = Minecraft.getMinecraft().player.inventory;
-				for (int i = 0; i < inventory.getSizeInventory(); i++)
-					if (!inventory.getStackInSlot(i).isEmpty()) stacks.add(inventory.getStackInSlot(i).copy());
-			}
-			for (ItemStack stack : stacks)
-			{
-				if (stack.isEmpty()) continue;
-				entries.add(new SearchEntry(stack, com.feed_the_beast.ftblib.client.CreativeItemIndex.searchName(stack),
-						String.valueOf(stack.getItem().getRegistryName().getNamespace())));
+				entries = new ArrayList<>();
+				if (Minecraft.getMinecraft().player != null)
+				{
+					var inventory = Minecraft.getMinecraft().player.inventory;
+					for (int i = 0; i < inventory.getSizeInventory(); i++)
+					{
+						ItemStack stack = inventory.getStackInSlot(i);
+						if (!stack.isEmpty()) entries.add(new CreativeItemIndex.SearchEntry(stack.copy(), stack.getItem().getRegistryName().getNamespace(),
+								new PinyinSearch.IndexedKey(CreativeItemIndex.searchName(stack))));
+					}
+				}
 			}
 		}
 		@Override public void run()
 		{
 			List<ItemStack> result = new ArrayList<>();
 			if (search.isEmpty()) result.add(ItemStack.EMPTY);
-			var query = com.feed_the_beast.ftblib.lib.util.PinyinSearch.query(search);
-			for (SearchEntry entry : entries)
+			var query = PinyinSearch.query(search);
+			for (CreativeItemIndex.SearchEntry entry : entries)
 			{
 				if (isInterrupted() || threadItemList != this) return;
-				if (search.isEmpty() || (search.startsWith("@") ? entry.mod.contains(search.substring(1)) : com.feed_the_beast.ftblib.lib.util.PinyinSearch.key(entry.name).matches(query))) result.add(entry.stack);
+				if (!catalog && !search.isEmpty() && !search.startsWith("@")) entry.key().prepare();
+				if (search.isEmpty() || (search.startsWith("@") ? entry.mod().contains(search.substring(1)) : entry.key().matches(query))) result.add(entry.stack());
 			}
-			if (!isInterrupted() && threadItemList == this) newStackItems = result;
+			synchronized (GuiSelectItemStack.this)
+			{
+				if (!isInterrupted() && threadItemList == this) newStackItems = new SearchResult(this, result);
+			}
 		}
 	}
 
@@ -424,8 +433,9 @@ public class GuiSelectItemStack extends GuiBase
 	private final Consumer<ItemStack> callback;
 	private final Panel tabs;
 	private volatile ThreadItemList threadItemList;
-	private volatile List<ItemStack> newStackItems;
+	private volatile SearchResult newStackItems;
 	private int itemIndexGeneration = -1;
+	private int searchIndexGeneration = -1;
 	public long update = Long.MAX_VALUE;
 
 	public GuiSelectItemStack(IOpenableGui g, ItemStack is, boolean s, Consumer<ItemStack> c)
@@ -481,7 +491,7 @@ public class GuiSelectItemStack extends GuiBase
 			@Override
 			public void addWidgets()
 			{
-				update = System.currentTimeMillis() + 200L;
+				requestSearch();
 			}
 
 			@Override
@@ -502,7 +512,7 @@ public class GuiSelectItemStack extends GuiBase
 			@Override
 			public void onTextChanged()
 			{
-				panelStacks.refreshWidgets();
+				requestSearch();
 			}
 		};
 
@@ -537,8 +547,6 @@ public class GuiSelectItemStack extends GuiBase
 		};
 
 		tabs.setPosAndSize(-19, 8, 20, 0);
-		threadItemList = new ThreadItemList();
-		threadItemList.start();
 	}
 
 	public GuiSelectItemStack(IOpenableGui g, Consumer<ItemStack> c)
@@ -564,7 +572,7 @@ public class GuiSelectItemStack extends GuiBase
 		stopSearch();
 	}
 
-	private void stopSearch()
+	private synchronized void stopSearch()
 	{
 		if (threadItemList != null)
 		{
@@ -580,30 +588,46 @@ public class GuiSelectItemStack extends GuiBase
 		threadItemList = null;
 	}
 
+	private void requestSearch()
+	{
+		stopSearch();
+		newStackItems = null;
+		update = System.currentTimeMillis();
+	}
+
 	@Override
 	public void drawBackground(Theme theme, int x, int y, int w, int h)
 	{
 		super.drawBackground(theme, x, y, w, h);
-		if (allItems && itemIndexGeneration != com.feed_the_beast.ftblib.client.CreativeItemIndex.generation())
+		if (allItems && itemIndexGeneration != CreativeItemIndex.generation())
 		{
-			itemIndexGeneration = com.feed_the_beast.ftblib.client.CreativeItemIndex.generation();
-			update = Math.min(update, System.currentTimeMillis() + 100);
+			itemIndexGeneration = CreativeItemIndex.generation();
+			update = Math.min(update, System.currentTimeMillis());
+		}
+		if (allItems && searchIndexGeneration != CreativeItemIndex.searchGeneration())
+		{
+			searchIndexGeneration = CreativeItemIndex.searchGeneration();
+			if (!searchBox.getText().isEmpty() && !searchBox.getText().startsWith("@")) update = Math.min(update, System.currentTimeMillis());
 		}
 
-		List<ItemStack> readyItems = newStackItems;
-		if (readyItems != null)
+		SearchResult ready = newStackItems;
+		if (ready != null)
 		{
 			newStackItems = null;
-			panelStacks.widgets.clear();
-			for (int i = 0; i < readyItems.size(); i++)
+			if (ready.request == threadItemList && ready.request.catalog == allItems && ready.request.search.equals(searchBox.getText().toLowerCase(java.util.Locale.ROOT)))
 			{
-				ItemStackButton button = new ItemStackButton(panelStacks, readyItems.get(i));
-				button.setPos(1 + i % 9 * 19, 1 + i / 9 * 19);
-				panelStacks.add(button);
+				List<ItemStack> readyItems = ready.items;
+				panelStacks.widgets.clear();
+				for (int i = 0; i < readyItems.size(); i++)
+				{
+					ItemStackButton button = new ItemStackButton(panelStacks, readyItems.get(i));
+					button.setPos(1 + i % 9 * 19, 1 + i / 9 * 19);
+					panelStacks.add(button);
+				}
+				scrollBar.setPosAndSize(panelStacks.posX + panelStacks.width + 6, panelStacks.posY - 1, 16, panelStacks.height + 2);
+				scrollBar.setValue(0);
+				scrollBar.setMaxValue(1 + MathHelper.ceil(panelStacks.widgets.size() / 9F) * 19);
 			}
-			scrollBar.setPosAndSize(panelStacks.posX + panelStacks.width + 6, panelStacks.posY - 1, 16, panelStacks.height + 2);
-			scrollBar.setValue(0);
-			scrollBar.setMaxValue(1 + MathHelper.ceil(panelStacks.widgets.size() / 9F) * 19);
 		}
 
 		long now = System.currentTimeMillis();

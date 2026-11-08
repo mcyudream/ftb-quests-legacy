@@ -38,4 +38,25 @@ class PinyinSearchTest
         for(var task:tasks)assertTrue(task.get(10,TimeUnit.SECONDS).matches("ssjc"));
         PinyinSearch.clear();assertTrue(PinyinSearch.key("钻石").matches("zuanshi"));
     }
+
+    @Test void literalAndRegistryQueriesWorkBeforePinyinPreparation()
+    {
+        var key = new PinyinSearch.IndexedKey("§b铁锭 minecraft:iron_ingot");
+        assertTrue(key.matches(PinyinSearch.query("铁锭")));
+        assertTrue(key.matches(PinyinSearch.query("minecraft:iron_ingot")));
+        assertTrue(key.matches(PinyinSearch.query("铁 iron")));
+        assertFalse(key.matches(PinyinSearch.query("钻石")));
+        assertFalse(key.matches(PinyinSearch.query("tieding")));
+    }
+
+    @Test void catalogKeysKeepPinyinAfterTheSharedCacheIsEvicted()
+    {
+        var key = new PinyinSearch.IndexedKey("铁锭 minecraft:iron_ingot");
+        key.prepare();
+        PinyinSearch.clear();
+        assertTrue(key.matches(PinyinSearch.query("tieding")));
+        assertTrue(key.matches(PinyinSearch.query("td")));
+        assertTrue(key.matches(PinyinSearch.query("铁 ding")));
+        assertFalse(key.matches(PinyinSearch.query("zuanshi")));
+    }
 }

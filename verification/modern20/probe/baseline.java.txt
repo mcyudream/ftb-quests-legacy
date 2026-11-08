@@ -1,0 +1,14 @@
+import com.feed_the_beast.ftblib.lib.util.PinyinSearch;
+public class SearchProbe {
+ public static void main(String[] args) {
+  int count=40000;long start=System.nanoTime();
+  String[] names=new String[count];for(int i=0;i<count;i++)names[i]="测试材料 "+i+" stress:item_"+i;
+  for(String name:names)PinyinSearch.key(name);
+  System.out.println("warm_ms="+(System.nanoTime()-start)/1000000);
+  for(String value:new String[]{"测试材料","stress:item_39999","ceshicailiao"}) {
+   var query=PinyinSearch.query(value);start=System.nanoTime();int matches=0;
+   for(String name:names)if(PinyinSearch.key(name).matches(query))matches++;
+   System.out.println("query="+value+" matches="+matches+" elapsed_ms="+(System.nanoTime()-start)/1000000);
+  }
+ }
+}

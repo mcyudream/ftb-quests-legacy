@@ -1,0 +1,17 @@
+{
+  "cleanroom": "0.4.0",
+  "side": "client",
+  "exit": 0,
+  "loader_version_seen": true,
+  "server_ready": false,
+  "timed_out": false,
+  "gameplay_report": {
+    "result": "PASS",
+    "cleanroom": "0.4.0",
+    "detail": "Native Cleanroom IME focus notifications; chapter right-click edit; wrapper clicks; exclusive title/subtitle/body; relayout; selectors; Chinese network and disk roundtrip",
+    "video": false,
+    "ponder": false,
+    "zs": false
+  },
+  "result": "FUNCTIONAL_PASS"
+}

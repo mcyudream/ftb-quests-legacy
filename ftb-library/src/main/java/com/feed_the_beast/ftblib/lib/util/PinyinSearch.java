@@ -34,6 +34,24 @@ public final class PinyinSearch
     }
 
     public record Query(List<String> literal,List<String> latin) {}
+
+    /** A catalog owns its keys, so exceeding the shared LRU never makes a query transliterate again. */
+    public static final class IndexedKey
+    {
+        private final String literal;
+        private volatile Key prepared;
+
+        public IndexedKey(String text) { literal = normalize(text); }
+        public void prepare() { if (prepared == null) prepared = key(literal); }
+        public boolean matches(Query query)
+        {
+            Key ready = prepared;
+            if (ready != null) return ready.matches(query);
+            for (String token : query.literal) if (!literal.contains(token)) return false;
+            return true;
+        }
+    }
+
     public static Query query(String value)
     {
         List<String> literal=List.of(normalize(value).strip().split("\\s+"));

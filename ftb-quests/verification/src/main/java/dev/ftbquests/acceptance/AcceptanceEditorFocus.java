@@ -50,6 +50,7 @@ public final class AcceptanceEditorFocus
     private GuiSelectPonder ponder;
     private TextBox search;
     private PonderLink.Option selectedPonder;
+    private ItemStack selectedItem;
     private static Boolean platformIme;
     private static int imeCalls;
     public static void install(){
@@ -168,7 +169,7 @@ public final class AcceptanceEditorFocus
                 AcceptanceMod.require(((GuiWrapper)mc.currentScreen).getGui()==editor&&editor.source.buffer.text().equals(savedBody),"Component cancel changed the body");
                 AcceptanceMod.require(Keyboard.areRepeatEventsEnabled(),"Closing component disabled key repeat in the returned editor");
                 checks.put("quest_selector_chinese_and_cancel_return_preserve_draft",true);
-                items=new GuiSelectItemStack(editor,stack->{});items.openGui();search=(TextBox)read(items,GuiSelectItemStack.class,"searchBox");
+                items=new GuiSelectItemStack(editor,stack->selectedItem=stack);items.openGui();search=(TextBox)read(items,GuiSelectItemStack.class,"searchBox");
                 search.setText("A𠀀B",false);search.setCursorPosition(3);search.keyPressed(Keyboard.KEY_LEFT,'\0');search.writeText("中");
                 AcceptanceMod.require(search.getText().equals("A中𠀀B"),"Left arrow split supplementary Han in single-line input");
                 search.setText("A𠀀B",false);search.setCursorPosition(1);search.keyPressed(Keyboard.KEY_RIGHT,'\0');search.writeText("文");
@@ -180,8 +181,21 @@ public final class AcceptanceEditorFocus
                 search.setText("",false);search.setCursorPosition(0);queue("tieding");wait=ticks;step=18;
             } else if(step==18&&ticks-wait>20) {
                 AcceptanceMod.require(search.getText().equals("tieding")&&hasIron(),"Item pinyin search regressed");
-                items.onBack();AcceptanceMod.require(editor.source.buffer.text().equals(savedBody),"Item selector return changed the body");
                 checks.put("item_selector_chinese_pinyin_and_return_preserve_draft",true);
+                ItemStack inventoryStack=new ItemStack(Items.IRON_INGOT,7);inventoryStack.setStackDisplayName("背包铁锭");
+                inventoryStack.getTagCompound().setString("search_test","keep_nbt");mc.player.inventory.setInventorySlotContents(0,inventoryStack);
+                Panel tabs=(Panel)read(items,GuiSelectItemStack.class,"tabs");Widget mode=tabs.widgets.get(0);click(mode.getX()+5,mode.getY()+5);
+                wait=ticks;step=181;
+            } else if(step==181&&ticks-wait>10) {
+                Panel stacks=(Panel)read(items,GuiSelectItemStack.class,"panelStacks");Widget found=null;
+                for(Widget widget:stacks.widgets){ItemStack stack=(ItemStack)read(widget,widget.getClass(),"stack");if(stack.hasTagCompound()&&stack.getTagCompound().getString("search_test").equals("keep_nbt")){found=widget;break;}}
+                AcceptanceMod.require(found!=null,"Inventory pinyin search did not find the named NBT stack");click(found.getX()+4,found.getY()+4);
+                // Restore catalog mode before accepting; the selected stack must remain an independent copy.
+                Panel tabs=(Panel)read(items,GuiSelectItemStack.class,"tabs");Widget mode=tabs.widgets.get(0);click(mode.getX()+5,mode.getY()+5);
+                clickButton(items,I18n.format("gui.accept"));
+                AcceptanceMod.require(selectedItem!=null&&selectedItem.getItem()==Items.IRON_INGOT&&selectedItem.getCount()==7&&selectedItem.getTagCompound().getString("search_test").equals("keep_nbt"),"Inventory selection lost count or NBT across mode switch");
+                AcceptanceMod.require(editor.source.buffer.text().equals(savedBody),"Item selector return changed the body");
+                checks.put("inventory_pinyin_selection_and_mode_switch_preserve_count_and_nbt",true);
                 ponder=new GuiSelectPonder(editor,List.of(new PonderLink.Option("minecraft:compass#ftbquests:focus","能源核心结构搭建",new ItemStack(Items.COMPASS))),option->selectedPonder=option);
                 ponder.openGui();ponder.focus();search=(TextBox)read(ponder,GuiButtonListBase.class,"searchBox");clickBox(search);queue("nyhxjgdj");wait=ticks;step=19;
             } else if(step==19&&ticks-wait>20) {

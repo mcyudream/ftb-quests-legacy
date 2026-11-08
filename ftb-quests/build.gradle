@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.feed_the_beast.mods'
-version = '1202.10.0-modern.19'
+version = '1202.10.0-modern.20'
 base.archivesName = 'FTBQuests'
 java { toolchain.languageVersion = JavaLanguageVersion.of(25); withSourcesJar() }
 

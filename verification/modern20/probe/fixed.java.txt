@@ -1,0 +1,15 @@
+import com.feed_the_beast.ftblib.lib.util.PinyinSearch;
+public class SearchProbe {
+ public static void main(String[] args) {
+  int count=40000;long start=System.nanoTime();
+  PinyinSearch.IndexedKey[] names=new PinyinSearch.IndexedKey[count];for(int i=0;i<count;i++)names[i]=new PinyinSearch.IndexedKey("测试材料 "+i+" stress:item_"+i);
+  var cold=PinyinSearch.query("stress:item_39999");start=System.nanoTime();int coldMatches=0;for(var name:names)if(name.matches(cold))coldMatches++;
+  System.out.println("cold_literal_ms="+(System.nanoTime()-start)/1000000+" matches="+coldMatches);
+  start=System.nanoTime();for(var name:names)name.prepare();System.out.println("warm_ms="+(System.nanoTime()-start)/1000000);
+  for(String value:new String[]{"测试材料","stress:item_39999","ceshicailiao"}) {
+   var query=PinyinSearch.query(value);start=System.nanoTime();int matches=0;
+   for(var name:names)if(name.matches(query))matches++;
+   System.out.println("query="+value+" matches="+matches+" elapsed_ms="+(System.nanoTime()-start)/1000000);
+  }
+ }
+}

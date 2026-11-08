@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "cleanroom": "0.4.0",
+  "detail": "40,000 distinct Chinese creative variants; cold literal search; warm Chinese/pinyin/registry/namespace; rapid query cancellation",
+  "video": false,
+  "ponder": false,
+  "zs": false
+}

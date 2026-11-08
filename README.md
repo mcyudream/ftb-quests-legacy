@@ -14,8 +14,8 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 
 | 文件 | 版本 |
 | --- | --- |
-| FTB Quests | `FTBQuests-1202.10.0-modern.19.jar` |
-| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.7.jar` |
+| FTB Quests | `FTBQuests-1202.10.0-modern.20.jar` |
+| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.8.jar` |
 | FTB Utilities（原整合包使用时保留） | `FTB-Utilities-NovaEng-5.5.1-modern.2.jar` |
 | ItemFilters（必装，另从原发布页下载） | `1.0.4.2` |
 
@@ -29,7 +29,7 @@ Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可
 
 ## 本版要点
 
-**Quests modern.19 / Library modern.7**：自绘输入框通知 Cleanroom 启用系统输入法，补齐 Windows 输入法激活路径；章节侧栏支持直接右键编辑，无需等待悬停展开。保留 modern.18 的点击坐标、互斥焦点和 Unicode 边界修复。详见 [modern.19 验收与参考实现](verification/modern19/README.md)。
+**Quests modern.20 / Library modern.8**：修复大量物品下搜索反复转拼音的问题，物品索引持有检索键，中文名称／注册名无需等待拼音预热；连续输入取消旧查询并保留列表至新结果就绪。保留 modern.19 的 Windows 输入法激活与章节右键修复。详见 [modern.20 验收](verification/modern20/README.md)。
 
 - **modern.17 Windows 保存热修复**：保持任务根目录不动，完整备份与事务回滚后逐文件原子提交；I/O 失败保留脏状态并间隔 5 秒重试。兼容旧事务记录和任务数据。详见 [发行说明](docs/releases/1202.10.0-modern.17.md)。
 
@@ -53,6 +53,8 @@ python3 tools/prepare_release.py
 CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁、执行 Quests／Library／补丁单元测试、重混淆、检查产物并保存 JAR／源码包／测试报告。推送与 `release.json` 一致的 `v*` 标签后，在 Linux 构建、Windows 原生文件锁和 IME 上下文检查均通过后自动发布 **非预览** GitHub Release。`SHA256SUMS` 校验下载文件，`BUILD-INFO.json` 记录提交与内容摘要。
 
 ## 验证范围
+
+modern.20 在 40919 个物品变体的正式 CR 0.4.0 客户端完成中文、拼音、注册名、模组过滤及快速改词回归；搜索显示时间约 82–117 毫秒（本机受控用例）。背包选取保留数量及 NBT，modern.19 的输入法／章节回归和专服保存重读也通过；单元测试共 106 项。详见 [modern.20 验收与对比](verification/modern20/README.md)。
 
 modern.19 已在正式 Cleanroom 0.4.0（非 userdev）客户端／专服通过章节右键编辑、平台输入法焦点通知、中文保存与未知字段保留回归。Quests 89 项、Library 13 项、专服补丁 2 项单元测试通过。Windows CI 使用真实 Win32 窗口与正式 CR 0.4.0 处理器检查 IME 上下文关联／解除／重新启用。正式版的 11 个下载资产已全部校验，生产 JAR 与实际验收文件一致；详见 [modern.19 验收](verification/modern19/README.md) 和 [发布文件校验](verification/modern19/published.json)。[modern.18 输入回归](verification/modern18/README.md) 与 [modern.17 发行记录](verification/modern17/README.md) 保留供查阅。
 

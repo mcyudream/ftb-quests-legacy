@@ -41,7 +41,7 @@ def main():
   for report in (ROOT/module/'build/test-results/test').glob('TEST-*.xml'):
    e=ET.parse(report).getroot();assert all(int(e.get(k,'0'))==0 for k in ['failures','errors','skipped']);tests.append(int(e.get('tests')))
   counts[module]=sum(tests)
- assert counts['ftb-quests']>=89 and counts['ftb-library']>=13 and counts['server-compat']>=2,counts
+ assert counts['ftb-quests']>=89 and counts['ftb-library']>=15 and counts['server-compat']>=2,counts
  try:commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True,stderr=subprocess.DEVNULL).strip()
  except subprocess.CalledProcessError:commit='uncommitted-local-candidate'
  record={'repository':'mcyudream/ftb-quests-legacy','commit':commit,'release':config,'tests':counts,'production_entries_sha256':entries}

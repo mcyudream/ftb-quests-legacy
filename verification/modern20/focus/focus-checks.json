@@ -1,0 +1,19 @@
+{
+  "chapter_collapsed_icon_real_right_click_opens_edit_config": true,
+  "chapter_expanded_menu_and_non_editor_permissions": true,
+  "cleanroom_platform_ime_focus_matches_editor_field": true,
+  "wrapper_click_uses_event_coordinates_and_chinese_stays_in_body": true,
+  "body_title_subtitle_clicks_are_exclusive": true,
+  "relayout_preserves_one_active_field": true,
+  "preview_click_releases_text_input": true,
+  "chinese_focus_network_disk_roundtrip_unknown_fields": true,
+  "component_and_selector_fields_activate_platform_ime": true,
+  "component_clicks_and_programmatic_focus_are_exclusive": true,
+  "quest_selector_chinese_and_cancel_return_preserve_draft": true,
+  "single_line_arrow_keys_keep_supplementary_han_whole": true,
+  "item_selector_chinese_pinyin_and_return_preserve_draft": true,
+  "inventory_pinyin_selection_and_mode_switch_preserve_count_and_nbt": true,
+  "ponder_initials_selection_and_return_preserve_draft": true,
+  "modal_context_menu_blocks_text_and_escape_restores_body_focus": true,
+  "native_ime_engine_keystrokes_not_automated": true
+}

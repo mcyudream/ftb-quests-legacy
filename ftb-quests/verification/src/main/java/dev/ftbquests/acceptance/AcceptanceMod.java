@@ -12,11 +12,16 @@ import java.util.*;
 @Mod(modid="ftbquests_acceptance",name="FTB Quests Acceptance Harness",version="1",dependencies="required-after:ftbquests",acceptableRemoteVersions="*")
 public final class AcceptanceMod
 {
+    @Mod.EventHandler public void preInit(FMLPreInitializationEvent event)
+    {
+        if (event.getSide().isClient() && Boolean.getBoolean("ftbquests.acceptance.search")) AcceptanceItemSearch.register();
+    }
     @Mod.EventHandler public void loaded(FMLLoadCompleteEvent event)
     {
         if (event.getSide().isClient())
         {
-            if (Boolean.getBoolean("ftbquests.acceptance.focus")) AcceptanceEditorFocus.install();
+            if (Boolean.getBoolean("ftbquests.acceptance.search")) AcceptanceItemSearch.install();
+            else if (Boolean.getBoolean("ftbquests.acceptance.focus")) AcceptanceEditorFocus.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.input")) AcceptanceInput.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.animation")) AcceptanceAnimation.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.creation")) AcceptanceCreation.install();

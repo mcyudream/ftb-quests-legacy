@@ -1,0 +1,5 @@
+cold_literal_ms=3 matches=1
+warm_ms=11934
+query=测试材料 matches=40000 elapsed_ms=5
+query=stress:item_39999 matches=1 elapsed_ms=6
+query=ceshicailiao matches=40000 elapsed_ms=2
