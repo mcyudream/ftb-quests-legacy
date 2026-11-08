@@ -201,7 +201,7 @@ public final class AcceptanceEditorFocus
                 checks.put("modal_context_menu_blocks_text_and_escape_restores_body_focus",true);
                 checks.put("native_ime_engine_keystrokes_not_automated",true);
                 Files.writeString(Path.of("focus-checks.json"),new GsonBuilder().setPrettyPrinting().create().toJson(checks));
-                AcceptanceMod.report("PASS","Native Cleanroom IME focus notifications; chapter right-click edit; wrapper clicks; exclusive title/subtitle/body; relayout; selectors; Chinese network and disk roundtrip",null);
+                AcceptanceMod.report("PASS","Native Cleanroom IME focus notifications; "+(Boolean.getBoolean("ftbquests.acceptance.skipchapters")?"chapter checks skipped; ":"chapter right-click edit; ")+"wrapper clicks; exclusive title/subtitle/body; relayout; selectors; Chinese network and disk roundtrip",null);
                 if(Boolean.getBoolean("ftbquests.acceptance.manual")) {
                     openEditor();editor.source.buffer.selectAll();editor.source.insert("# 中文输入测试\n\n请点击这里输入中文，再切换标题、副标题测试。\n\n当前为独立测试存档。");
                     click(editor.source.getX()+4,editor.source.getY()+30);
@@ -246,7 +246,11 @@ public final class AcceptanceEditorFocus
     }
     private Object field(String name)throws Exception {Field f=GuiQuestTextEditor.class.getDeclaredField(name);f.setAccessible(true);return f.get(editor);}
     private static Object read(Object object,Class<?> type,String name)throws Exception {Field f=type.getDeclaredField(name);f.setAccessible(true);return f.get(object);}
-    private void clickBox(TextBox box)throws Exception {click(box.getX()+4,box.getY()+4);}
+    private void clickBox(TextBox box)throws Exception {
+        click(box.getX()+4,box.getY()+4);
+        AcceptanceMod.require(box.isFocused()&&Boolean.TRUE.equals(platformIme),"Clicked search/component input did not activate platform IME");
+        checks.put("component_and_selector_fields_activate_platform_ime",true);
+    }
     private void clickButton(Panel panel,String title)throws Exception {
         Widget found=null;for(Widget widget:panel.widgets)if(widget instanceof Button&&widget.getTitle().equals(title)){found=widget;break;}
         if(found==null)for(Widget widget:panel.widgets)if(widget instanceof Panel child){try{clickButton(child,title);return;}catch(NoSuchElementException ignored){}}

@@ -50,11 +50,11 @@ python3 tools/prepare_release.py
 
 使用 Java 25 和 Python 3.11+。依赖按锁文件下载并校验 SHA-256，缓存位于 `.build-deps/`；不依赖维护者的同级工作目录。Cleanroom 编译 SDK 与最低运行基线分别声明；较新的 SDK 不提高最低加载器版本。
 
-CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁、执行 Quests／Library／补丁单元测试、重混淆、检查产物并保存 JAR／源码包／测试报告。推送与 `release.json` 一致的 `v*` 标签后，在 Linux 构建和 Windows 原生文件锁检查均通过后自动发布 **非预览** GitHub Release。`SHA256SUMS` 校验下载文件，`BUILD-INFO.json` 记录提交与内容摘要。
+CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁、执行 Quests／Library／补丁单元测试、重混淆、检查产物并保存 JAR／源码包／测试报告。推送与 `release.json` 一致的 `v*` 标签后，在 Linux 构建、Windows 原生文件锁和 IME 上下文检查均通过后自动发布 **非预览** GitHub Release。`SHA256SUMS` 校验下载文件，`BUILD-INFO.json` 记录提交与内容摘要。
 
 ## 验证范围
 
-modern.18 的云端 CI 生产 JAR 已逐一下载校验，与正式 Cleanroom 0.4.0（非 userdev）客户端／专服实际验收的文件一致。Quests 89 项、Library 13 项、专服补丁 2 项单元测试通过；Windows 原生目录占用、文件共享锁、回滚与解锁重试检查通过：[modern.18 输入回归](verification/modern18/README.md)。[modern.17 发行记录](verification/modern17/README.md) 保留供查阅。
+modern.19 已在正式 Cleanroom 0.4.0（非 userdev）客户端／专服通过章节右键编辑、平台输入法焦点通知、中文保存与未知字段保留回归。Quests 89 项、Library 13 项、专服补丁 2 项单元测试通过。Windows CI 使用真实 Win32 窗口与正式 CR 0.4.0 处理器检查 IME 上下文关联／解除／重新启用；详见 [modern.19 验收](verification/modern19/README.md)。[modern.18 输入回归](verification/modern18/README.md) 与 [modern.17 发行记录](verification/modern17/README.md) 保留供查阅。
 
 modern.16 历史记录保留在 [原本地版报告](verification/local-modern16/REPORT.md) 和 [原公开构建验收](verification/release/README.md)。
 

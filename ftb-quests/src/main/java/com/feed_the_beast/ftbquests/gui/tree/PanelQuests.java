@@ -553,7 +553,7 @@ public class PanelQuests extends Panel
 	@Override
 	public boolean mousePressed(MouseButton button)
 	{
-		if (treeGui.selectedChapter == null)
+		if (treeGui.selectedChapter == null || !isMouseOver())
 		{
 			return false;
 		}

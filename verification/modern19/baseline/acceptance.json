@@ -1,0 +1,9 @@
+{
+  "result": "FAIL",
+  "cleanroom": "0.4.0",
+  "detail": "Editor focus stage 2",
+  "video": false,
+  "ponder": false,
+  "zs": false,
+  "error": "java.lang.AssertionError: Cleanroom native IME was not notified: state\u003dfalse, calls\u003d6\n\tat dev.ftbquests.acceptance.AcceptanceMod.require(AcceptanceMod.java:55)\n\tat dev.ftbquests.acceptance.AcceptanceEditorFocus.focus(AcceptanceEditorFocus.java:234)\n\tat dev.ftbquests.acceptance.AcceptanceEditorFocus.tick(AcceptanceEditorFocus.java:96)\n\tat net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:79)\n\tat net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:204)\n\tat net.minecraftforge.fml.common.FMLCommonHandler.onPostClientTick(FMLCommonHandler.java:360)\n\tat net.minecraft.client.Minecraft.func_71407_l(Minecraft.java:1932)\n\tat net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1088)\n\tat net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:399)\n\tat net.minecraft.client.main.Main.main(SourceFile:123)\n\tat top.outlands.foundation.LaunchHandler.launch(LaunchHandler.java:125)\n\tat top.outlands.foundation.boot.Foundation.main(Foundation.java:42)\n"
+}

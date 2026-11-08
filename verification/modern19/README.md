@@ -10,7 +10,7 @@ FTB Library 的 `TextBox` 与正文多行输入框均为自绘控件。此前只
 
 ## 章节点击
 
-侧栏 `ButtonChapter.onClicked` 原本是空回调，仅悬停后生成的展开按钮包含操作。现侧栏与展开章节共用点击处理：左键切换，右键在有编辑权限时打开移动、编辑和删除菜单。未开启编辑模式的玩家不获得章节编辑入口。
+侧栏 `ButtonChapter.onClicked` 原本是空回调，仅悬停后生成的展开按钮包含操作。真实点击回归进一步发现，画布的右键分支没有检查鼠标是否位于画布，先于侧栏消费事件并弹出添加任务菜单。现画布限制鼠标区域，侧栏与展开章节共用点击处理：左键切换，右键在有编辑权限时打开移动、编辑和删除菜单。未开启编辑模式的玩家不获得章节编辑入口。
 
 ## 验收边界
 
@@ -18,6 +18,15 @@ FTB Library 的 `TextBox` 与正文多行输入框均为自绘控件。此前只
 
 客户端回归观察并委托给**真实** Cleanroom 原生 IME 处理器，检查标题／副标题／正文的焦点变化是否通知平台；使用真实鼠标分发、游戏字符队列、组件表单、物品／任务／思索选择器，检查保存与未知字段保留。
 
-Windows CI 使用下载后校验 SHA-256 的正式 CR 0.4.0、JNA 和 JNA Platform，创建真实 Win32 窗口，把其 IME 上下文解除后调用加载器的真实 `WindowsIMEHandler`，检查关联、解除、重新启用。测试不使用虚假的 IMM 实现。
+Windows CI 使用下载后校验 SHA-256 的正式 CR 0.4.0、JNA 和 JNA Platform，创建真实 Win32 窗口，把其 IME 上下文解除后调用加载器的真实 `WindowsIMEHandler`，检查关联、解除、重新启用。测试不使用虚假的 IMM 实现。[检查已通过](https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42464079509)：[IME 输出](windows-ime.txt)、[文件锁输出](windows-storage.txt)。
 
 **Windows 原生上下文检查不包含 Minecraft 的 OpenGL 窗口和微软拼音候选词按键流程。** 不能据此声称 Windows 完整整合包或实际中文选词验收通过。
+
+## 真实产物回归
+
+- [modern.18 失败结果](baseline/result.json)：原版 Library modern.6 正文内部已经获得焦点，但实际 Cleanroom IME 处理器最后状态仍为 `false`；此检查在 Linux 正式运行环境观察平台通知，不声称复现了 Windows 候选词界面。
+- [客户端结果](client/result.json) 与 [逐项检查](client/focus-checks.json)：实际 `GuiWrapper` 右键章节图标并点击编辑，进入章节配置页；展开章节菜单及非编辑权限检查通过。正文／标题／副标题、重排、预览、组件表单、任务／物品／思索搜索与返回、上下文菜单均检查平台输入法状态或焦点归属；中文及补充汉字网络保存与磁盘重读保留未知字段。
+- [专服结果](server/result.json)：无 Ponder、Media API、MCP，使用独立 CR 0.4.0 专服兼容补丁，启动和任务数据完整读写重载通过，退出码 0。
+- [构建记录](build.json)：104 项单元测试通过，零失败、零跳过；[客户端](client/runtime.json) 和 [专服](server/runtime.json) 记录实际运行 JAR 的 SHA-256。
+
+使用用户任务书的独立副本（22 个章节、621 个任务），未修改原实例。客户端自动化完成后正常退出。
