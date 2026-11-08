@@ -1,0 +1,4 @@
+PASS: real Cleanroom 0.4.0 handler associates the disabled Win32 input context
+PASS: native IME blur and refocus restore the context without an external editor
+WINDOWS_IME_CONTEXT_PASS
+Boundary: no Microsoft Pinyin candidate keystrokes or Minecraft OpenGL window were automated

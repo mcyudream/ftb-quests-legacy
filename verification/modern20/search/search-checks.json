@@ -1,13 +1,13 @@
 {
   "creative_variants": 40919,
   "extra_distinct_chinese_names": 40000,
-  "background_prepare_ms": 21149,
+  "background_prepare_ms": 20898,
   "rapid_query_keeps_latest_iron_result": true,
   "queries": [
     {
       "phase": "literal_while_pinyin_paused",
       "query": "minecraft:iron_ingot",
-      "visible_ms": 110,
+      "visible_ms": 155,
       "result_count": 1
     },
     {
@@ -25,13 +25,13 @@
     {
       "phase": "warm_query",
       "query": "@minecraft",
-      "visible_ms": 117,
+      "visible_ms": 101,
       "result_count": 893
     },
     {
       "phase": "warm_query",
       "query": "zuanshi",
-      "visible_ms": 82,
+      "visible_ms": 98,
       "result_count": 13
     },
     {

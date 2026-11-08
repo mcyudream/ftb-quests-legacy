@@ -4,12 +4,12 @@
   "userdev": false,
   "installer_sha256": "882435d851a51e14b802e0a9384e4a05cfbb3890fca435c40c494af75e5a166f",
   "jars": {
-    "FTBQuests-1202.10.0-modern.20.jar": "0d0b84de67d7edfc6f96638693c561eda3db9ba312ed3938eb047924f2ecc2bf",
-    "FTB-Library-NovaEng-5.5.4-modern.8.jar": "a141a2b26336166af275bd7bd82e4e6456a29985db49eddcf44e71357a45b138",
+    "FTBQuests-1202.10.0-modern.20.jar": "d24b03a1f2a1d59f106db4f0bb362ecaa5644875a5664c0deb94782d884fcf44",
+    "FTB-Library-NovaEng-5.5.4-modern.8.jar": "4bb1e89ec62e3684ace3a89028aa4b480fa002f42ef691008a329a1625459ae7",
     "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "23127cbd045d10bd2b97c92c4fec35b13e42f799ebe3f36d4435eee53ef67d3c",
     "Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar": "ab21b0b5940e83190cf84a9eb7f266332b7358e1942968b1213fe32260660bbb",
     "ItemFilters-1.0.4.2.jar": "cdffbb810f75db50afce9681374f0604e4c1ed2dcfe768cff5b4e17d5384166b",
-    "ftbquests-acceptance.jar": "bca1f1b2cbc1ef5bcca222cb12c78657d30fb9d3b5090e783761bed8aa5154ad"
+    "ftbquests-acceptance.jar": "db5e097a650dfd35eb1d14cf10ac1ddc5405242b964f8fdedbc3d9c970fa4c0c"
   },
   "libraries": {
     "/home/yudream/code/mods/.dev/ae2-addons-cleanroom-0.4.0-runtime/libraries/com/cleanroommc/cleanroom/0.4.0/cleanroom-0.4.0.jar": "2b697f6538c4d893ddbd876eb02d9ea55743a4f8",
