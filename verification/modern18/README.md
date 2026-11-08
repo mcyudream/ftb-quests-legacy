@@ -22,6 +22,8 @@
 
 单元测试共 **104 项通过**（Quests 89 / Library 13 / 专服补丁 2），零失败、零跳过；新增的两个单元测试覆盖补充汉字的换行／点击位置和选择替换／撤销。见 [构建记录](build.json)。
 
+[源码 CI](https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42459684559) 的 Linux 构建、104 项测试、验收 Harness 编译／重混淆及 Windows 原生文件锁检查均通过。云端的四个生产 JAR 已下载并验证 SHA-256，与下述实际游戏验收文件一致：[云端文件校验](cloud-build.json)。
+
 真实客户端回归见 [focus-checks.json](client/focus-checks.json) 和 [acceptance.json](client/acceptance.json)。客户端完成自动化检查后保留正文编辑器供用户测试，未自动关闭；**这里没有声称客户端已经退出或人工输入法测试已经通过**。
 
 ## 运行环境与产物

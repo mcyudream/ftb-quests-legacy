@@ -14,8 +14,8 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 
 | 文件 | 版本 |
 | --- | --- |
-| FTB Quests | `FTBQuests-1202.10.0-modern.17.jar` |
-| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.5.jar` |
+| FTB Quests | `FTBQuests-1202.10.0-modern.18.jar` |
+| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.6.jar` |
 | FTB Utilities（原整合包使用时保留） | `FTB-Utilities-NovaEng-5.5.1-modern.2.jar` |
 | ItemFilters（必装，另从原发布页下载） | `1.0.4.2` |
 
@@ -29,7 +29,7 @@ Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可
 
 ## 本版要点
 
-当前源码已更新为 **Quests modern.18 / Library modern.6 输入修复测试构建**：同步实际点击坐标、统一管理输入焦点，保留窗口重排后的输入目标，并修复补充汉字的光标／换行边界。104 项单元测试和正式 CR 0.4.0 客户端输入回归、专服读写通过；人工系统输入法测试正在进行。详见 [输入回归记录](verification/modern18/README.md)。
+**Quests modern.18 / Library modern.6 输入焦点修复版**：同步实际点击坐标、统一管理输入焦点，保留窗口重排后的输入目标，并修复补充汉字的光标／换行边界。104 项单元测试和正式 CR 0.4.0 客户端输入回归、专服读写通过；系统输入法真实候选词按键尚未自动化实测。详见 [输入回归记录](verification/modern18/README.md)。
 
 - **modern.17 Windows 保存热修复**：保持任务根目录不动，完整备份与事务回滚后逐文件原子提交；I/O 失败保留脏状态并间隔 5 秒重试。兼容旧事务记录和任务数据。详见 [发行说明](docs/releases/1202.10.0-modern.17.md)。
 
@@ -54,8 +54,8 @@ CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁�
 
 ## 验证范围
 
-modern.17 的正式发布文件已逐一下载校验，与正式 Cleanroom 0.4.0（非 userdev）客户端／专服实际验收的 CI 文件一致。Quests 87 项、Library 13 项、专服补丁 2 项单元测试通过；Windows 原生目录占用、文件共享锁、回滚与解锁重试检查通过：[modern.17 发行验收](verification/modern17/README.md)。
+modern.18 的云端 CI 生产 JAR 已逐一下载校验，与正式 Cleanroom 0.4.0（非 userdev）客户端／专服实际验收的文件一致。Quests 89 项、Library 13 项、专服补丁 2 项单元测试通过；Windows 原生目录占用、文件共享锁、回滚与解锁重试检查通过：[modern.18 输入回归](verification/modern18/README.md)。[modern.17 发行记录](verification/modern17/README.md) 保留供查阅。
 
 modern.16 历史记录保留在 [原本地版报告](verification/local-modern16/REPORT.md) 和 [原公开构建验收](verification/release/README.md)。
 
-modern.17 已移除独立系统编辑窗口，中文按游戏键盘字符队列送入原输入框并验证保存；**系统输入法引擎的真实候选词按键流程未自动化实测**。Linux x86_64 已验证，Windows/macOS 和完整整合包未实测。拼音采用当前显示名及 ICU 的读音，未枚举所有多音字别名。详见使用说明。
+独立系统编辑窗口已移除，中文按游戏键盘字符队列送入原输入框并验证保存；**系统输入法引擎的真实候选词按键流程未自动化实测**。Linux x86_64 已验证，Windows/macOS 和完整整合包未实测。拼音采用当前显示名及 ICU 的读音，未枚举所有多音字别名。详见使用说明。
