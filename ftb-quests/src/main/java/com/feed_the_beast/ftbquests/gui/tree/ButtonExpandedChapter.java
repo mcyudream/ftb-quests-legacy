@@ -68,7 +68,13 @@ public class ButtonExpandedChapter extends SimpleTextButton
 	@Override
 	public void onClicked(MouseButton button)
 	{
-		if (treeGui.file.canEdit() || !chapter.quests.isEmpty())
+		onChapterClicked(treeGui, chapter, button);
+	}
+
+	static void onChapterClicked(GuiQuestTree treeGui, Chapter chapter, MouseButton button)
+	{
+		if (!button.isLeft() && !button.isRight()) return;
+		if (treeGui.file.canEdit() || !chapter.quests.isEmpty() || chapter.hasChildren())
 		{
 			GuiHelper.playClickSound();
 

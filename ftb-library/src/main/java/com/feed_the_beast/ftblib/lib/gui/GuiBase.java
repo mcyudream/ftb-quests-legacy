@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiConfirmOpenLink;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.GuiYesNo;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
@@ -56,6 +57,8 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 	public boolean fixUnicode;
 	private GuiScreen prevScreen;
 	private FocusableTextInput focusedTextInput;
+	private static GuiTextField platformTextInput;
+	private static GuiScreen platformTextInputScreen;
 	public Panel contextMenu = null;
 
 	public final FocusableTextInput getFocusedTextInput()
@@ -86,9 +89,27 @@ public abstract class GuiBase extends Panel implements IOpenableGui
 
 	private static void updateKeyboardRepeatEvents()
 	{
-		GuiScreen active = Minecraft.getMinecraft().currentScreen;
-		if (active instanceof IGuiWrapper) Keyboard.enableRepeatEvents(((IGuiWrapper) active).getGui().hasTextInputFocus());
-		else if (active == null) Keyboard.enableRepeatEvents(false);
+		Minecraft mc = Minecraft.getMinecraft();
+		GuiScreen active = mc.currentScreen;
+		if (active instanceof IGuiWrapper || active == null)
+		{
+			boolean focused = active instanceof IGuiWrapper && ((IGuiWrapper) active).getGui().hasTextInputFocus();
+			Keyboard.enableRepeatEvents(focused);
+			// Cleanroom patches the vanilla field to activate the platform IME and mark the screen
+			// as text-focused. Use that path on both baseline IMM and newer SDL backends.
+			// This delegate is never drawn, added as a widget, or used to hold the user's text.
+			if (platformTextInput == null) platformTextInput = new GuiTextField(-1, mc.fontRenderer, 0, 0, 1, 1);
+			if (platformTextInputScreen != active || platformTextInput.isFocused() != focused)
+			{
+				platformTextInputScreen = active;
+				platformTextInput.setFocused(focused);
+			}
+		}
+		else
+		{
+			// The destination screen owns its own input method; do not override it while closing ours.
+			platformTextInputScreen = null;
+		}
 	}
 
 	private void clearTextInputFocus()

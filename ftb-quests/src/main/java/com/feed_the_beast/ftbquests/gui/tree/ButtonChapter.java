@@ -28,6 +28,7 @@ public class ButtonChapter extends ButtonTab
 	@Override
 	public void onClicked(MouseButton button)
 	{
+		ButtonExpandedChapter.onChapterClicked(treeGui, chapter, button);
 	}
 
 	@Override

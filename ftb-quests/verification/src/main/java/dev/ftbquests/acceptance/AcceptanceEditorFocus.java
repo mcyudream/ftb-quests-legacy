@@ -8,6 +8,7 @@ import com.feed_the_beast.ftblib.lib.util.NBTUtils;
 import com.feed_the_beast.ftbquests.client.ClientQuestFile;
 import com.feed_the_beast.ftbquests.client.PonderLink;
 import com.feed_the_beast.ftbquests.gui.GuiSelectPonder;
+import com.feed_the_beast.ftbquests.gui.tree.*;
 import com.feed_the_beast.ftbquests.quest.*;
 import com.feed_the_beast.ftbquests.texteditor.*;
 import com.feed_the_beast.ftbquests.util.EditHistory;
@@ -49,7 +50,26 @@ public final class AcceptanceEditorFocus
     private GuiSelectPonder ponder;
     private TextBox search;
     private PonderLink.Option selectedPonder;
-    public static void install(){MinecraftForge.EVENT_BUS.register(new AcceptanceEditorFocus());}
+    private static Boolean platformIme;
+    private static int imeCalls;
+    public static void install(){
+        observePlatformIme();
+        MinecraftForge.EVENT_BUS.register(new AcceptanceEditorFocus());
+    }
+
+    /** Observe and delegate to the actual baseline native handler; never replace it with a dummy. */
+    @SuppressWarnings("unchecked") private static void observePlatformIme() {
+        try {
+            Class<?> handler=Class.forName("com.cleanroommc.client.IMEHandler");
+            Field target=handler.getDeclaredField("instance");target.setAccessible(true);
+            java.util.function.Consumer<Boolean> nativeHandler=(java.util.function.Consumer<Boolean>)target.get(null);
+            Class<?> unsafeClass=Class.forName("sun.misc.Unsafe");Field field=unsafeClass.getDeclaredField("theUnsafe");field.setAccessible(true);Object unsafe=field.get(null);
+            Object base=unsafeClass.getMethod("staticFieldBase",Field.class).invoke(unsafe,target);
+            long offset=(long)unsafeClass.getMethod("staticFieldOffset",Field.class).invoke(unsafe,target);
+            java.util.function.Consumer<Boolean> observer=value->{nativeHandler.accept(value);platformIme=value;imeCalls++;};
+            unsafeClass.getMethod("putObjectVolatile",Object.class,long.class,Object.class).invoke(unsafe,base,offset,observer);
+        } catch(ReflectiveOperationException ex) {throw new AssertionError("Cannot observe real Cleanroom 0.4.0 native IME handler",ex);}
+    }
 
     @SubscribeEvent public void tick(TickEvent.ClientTickEvent event)
     {
@@ -70,6 +90,7 @@ public final class AcceptanceEditorFocus
                     ServerQuestData.onPlayerLoggedIn(new ForgePlayerLoggedInEvent(Universe.get().getPlayer(player)));serverStep=1;
                 });
             } else if(step==2&&serverStep==1&&ClientQuestFile.INSTANCE.getQuest(QUEST)!=null&&ClientQuestFile.INSTANCE.canEdit()) {
+                if(!Boolean.getBoolean("ftbquests.acceptance.skipchapters")) chapterClicks();
                 openEditor();
                 // Deliberately leave the last rendered pointer over the title. A click may arrive before the next frame.
                 editor.updateGui(title.getX()+4,title.getY()+4,0);
@@ -180,7 +201,7 @@ public final class AcceptanceEditorFocus
                 checks.put("modal_context_menu_blocks_text_and_escape_restores_body_focus",true);
                 checks.put("native_ime_engine_keystrokes_not_automated",true);
                 Files.writeString(Path.of("focus-checks.json"),new GsonBuilder().setPrettyPrinting().create().toJson(checks));
-                AcceptanceMod.report("PASS","Wrapper mouse clicks; exact body line; exclusive title/subtitle/body focus; relayout; preview; Chinese network and disk roundtrip",null);
+                AcceptanceMod.report("PASS","Native Cleanroom IME focus notifications; chapter right-click edit; wrapper clicks; exclusive title/subtitle/body; relayout; selectors; Chinese network and disk roundtrip",null);
                 if(Boolean.getBoolean("ftbquests.acceptance.manual")) {
                     openEditor();editor.source.buffer.selectAll();editor.source.insert("# 中文输入测试\n\n请点击这里输入中文，再切换标题、副标题测试。\n\n当前为独立测试存档。");
                     click(editor.source.getX()+4,editor.source.getY()+30);
@@ -195,6 +216,33 @@ public final class AcceptanceEditorFocus
     private void openEditor() throws Exception {
         TextEditorFrame.open(ClientQuestFile.INSTANCE.getQuest(QUEST));editor=(GuiQuestTextEditor)((GuiWrapper)mc.currentScreen).getGui();
         title=(TextBox)field("title");subtitle=(TextBox)field("subtitle");
+    }
+    private void chapterClicks()throws Exception {
+        var file=ClientQuestFile.INSTANCE;var chapter=file.getChapter(CHAPTER);GuiQuestTree tree=file.questTreeGui;
+        tree.open(chapter,false);
+        ButtonChapter tab=(ButtonChapter)tree.chapterPanel.widgets.stream().filter(w->w instanceof ButtonChapter b&&b.chapter==chapter).findFirst().orElseThrow();
+        tree.chapterPanel.setScrollY(Math.max(0,tab.posY-20));
+        tree.chapterPanel.setOffset(true);int x=tab.getX()+8,y=tab.getY()+8;tree.chapterPanel.setOffset(false);
+        tree.chapterHoverPanel.chapter=null;tree.chapterHoverPanel.refreshWidgets();
+        click(x,y,1);
+        AcceptanceMod.require(tree.contextMenu instanceof ContextMenu,"Collapsed chapter icon right-click did not open a menu before hover tick");
+        ContextMenu menu=(ContextMenu)tree.contextMenu;
+        ContextMenu.CButton edit=(ContextMenu.CButton)menu.widgets.stream().filter(w->w.getTitle().equals(I18n.format("selectServer.edit"))).findFirst().orElseThrow(()->new AssertionError("No chapter edit item: "+menu.items.stream().map(i->i.title).toList()+", target="+tab.posY+", scroll="+tree.chapterPanel.getScrollY()+", pointer="+tree.getMouseX()+","+tree.getMouseY()));
+        menu.setScrollY(Math.max(0,edit.posY-menu.height/2));menu.setOffset(true);x=edit.getX()+5;y=edit.getY()+5;menu.setOffset(false);
+        click(x,y,0);
+        AcceptanceMod.require(mc.currentScreen instanceof GuiWrapper&&((GuiWrapper)mc.currentScreen).getGui() instanceof GuiEditConfig,"Chapter context edit did not open config");
+        checks.put("chapter_collapsed_icon_real_right_click_opens_edit_config",true);
+        ((GuiWrapper)mc.currentScreen).getGui().closeGui(true);
+        tree.open(chapter,false);tree.chapterHoverPanel.chapter=tab;tree.chapterHoverPanel.refreshWidgets();tree.updateGui(x,y,0);
+        ButtonExpandedChapter expanded=(ButtonExpandedChapter)tree.chapterHoverPanel.widgets.stream().filter(w->w instanceof ButtonExpandedChapter b&&b.chapter.id==CHAPTER).findFirst().orElseThrow();
+        click(expanded.getX()+5,expanded.getY()+5,1);
+        AcceptanceMod.require(tree.contextMenu instanceof ContextMenu,"Expanded chapter right-click menu regressed");tree.closeContextMenu();
+        file.editingMode=false;
+        try {
+            tab.onClicked(com.feed_the_beast.ftblib.lib.util.misc.MouseButton.RIGHT);
+            AcceptanceMod.require(tree.contextMenu==null,"Non-editor got a chapter edit menu");
+        } finally {file.editingMode=true;}
+        checks.put("chapter_expanded_menu_and_non_editor_permissions",true);
     }
     private Object field(String name)throws Exception {Field f=GuiQuestTextEditor.class.getDeclaredField(name);f.setAccessible(true);return f.get(editor);}
     private static Object read(Object object,Class<?> type,String name)throws Exception {Field f=type.getDeclaredField(name);f.setAccessible(true);return f.get(object);}
@@ -212,12 +260,17 @@ public final class AcceptanceEditorFocus
     private void focus(boolean a,boolean b,boolean c) {
         AcceptanceMod.require(title.isFocused()==a&&subtitle.isFocused()==b&&editor.source.isFocused()==c,
                 "Wrong focus: title="+title.isFocused()+", subtitle="+subtitle.isFocused()+", source="+editor.source.isFocused());
+        AcceptanceMod.require(platformIme!=null&&platformIme==(a||b||c),"Cleanroom native IME was not notified: state="+platformIme+", calls="+imeCalls);
+        checks.put("cleanroom_platform_ime_focus_matches_editor_field",true);
     }
     private void click(int x,int y)throws Exception {
+        click(x,y,0);
+    }
+    private void click(int x,int y,int button)throws Exception {
         // GuiWrapper receives event coordinates before the next drawScreen/updateGui.
         Method clicked=Arrays.stream(GuiWrapper.class.getDeclaredMethods()).filter(m->Modifier.isProtected(m.getModifiers())&&Modifier.isFinal(m.getModifiers())&&Arrays.equals(m.getParameterTypes(),new Class<?>[]{int.class,int.class,int.class})).findFirst().orElseThrow();
-        clicked.setAccessible(true);clicked.invoke(mc.currentScreen,x,y,0);
-        ((GuiWrapper)mc.currentScreen).getGui().mouseReleased(com.feed_the_beast.ftblib.lib.util.misc.MouseButton.LEFT);
+        clicked.setAccessible(true);clicked.invoke(mc.currentScreen,x,y,button);
+        ((GuiWrapper)mc.currentScreen).getGui().mouseReleased(com.feed_the_beast.ftblib.lib.util.misc.MouseButton.get(button));
     }
     private static void queue(String text)throws Exception {
         Method method=Keyboard.class.getMethod("addCharEvent",int.class,char.class);for(char c:text.toCharArray())method.invoke(null,0,c);

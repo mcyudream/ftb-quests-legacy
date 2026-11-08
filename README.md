@@ -14,8 +14,8 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 
 | 文件 | 版本 |
 | --- | --- |
-| FTB Quests | `FTBQuests-1202.10.0-modern.18.jar` |
-| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.6.jar` |
+| FTB Quests | `FTBQuests-1202.10.0-modern.19.jar` |
+| FTB Library | `FTB-Library-NovaEng-5.5.4-modern.7.jar` |
 | FTB Utilities（原整合包使用时保留） | `FTB-Utilities-NovaEng-5.5.1-modern.2.jar` |
 | ItemFilters（必装，另从原发布页下载） | `1.0.4.2` |
 
@@ -29,7 +29,7 @@ Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可
 
 ## 本版要点
 
-**Quests modern.18 / Library modern.6 输入焦点修复版**：同步实际点击坐标、统一管理输入焦点，保留窗口重排后的输入目标，并修复补充汉字的光标／换行边界。104 项单元测试和正式 CR 0.4.0 客户端输入回归、专服读写通过；系统输入法真实候选词按键尚未自动化实测。详见 [输入回归记录](verification/modern18/README.md)。
+**Quests modern.19 / Library modern.7**：自绘输入框通知 Cleanroom 启用系统输入法，补齐 Windows 输入法激活路径；章节侧栏支持直接右键编辑，无需等待悬停展开。保留 modern.18 的点击坐标、互斥焦点和 Unicode 边界修复。详见 [modern.19 验收与参考实现](verification/modern19/README.md)。
 
 - **modern.17 Windows 保存热修复**：保持任务根目录不动，完整备份与事务回滚后逐文件原子提交；I/O 失败保留脏状态并间隔 5 秒重试。兼容旧事务记录和任务数据。详见 [发行说明](docs/releases/1202.10.0-modern.17.md)。
 

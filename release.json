@@ -1,13 +1,13 @@
 {
-  "tag": "v1202.10.0-modern.18",
-  "title": "FTB Quests Legacy 1202.10.0-modern.18",
+  "tag": "v1202.10.0-modern.19",
+  "title": "FTB Quests Legacy 1202.10.0-modern.19",
   "prerelease": false,
   "minecraft": "1.12.2",
   "cleanroom": "0.4.0",
   "java": 25,
   "modules": {
-    "ftb-quests": "FTBQuests-1202.10.0-modern.18",
-    "ftb-library": "FTB-Library-NovaEng-5.5.4-modern.6",
+    "ftb-quests": "FTBQuests-1202.10.0-modern.19",
+    "ftb-library": "FTB-Library-NovaEng-5.5.4-modern.7",
     "ftb-utilities": "FTB-Utilities-NovaEng-5.5.1-modern.2",
     "server-compat": "Cleanroom-0.4.0-Server-Compatibility-1.0.0"
   }
