@@ -1,0 +1,102 @@
+{
+  "release_url": "https://github.com/mcyudream/ftb-quests-legacy/releases/tag/v1202.10.0-modern.19",
+  "release_id": 438137100,
+  "tag": "v1202.10.0-modern.19",
+  "commit": "a21d1fc831fc6fca351a67da6bd24da0f570d242",
+  "draft": false,
+  "prerelease": false,
+  "latest": true,
+  "source_ci": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42464868801",
+  "tag_ci": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42465302650",
+  "jobs": [
+    {
+      "name": "windows-ime",
+      "conclusion": "success",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42465302650/job/128683324465"
+    },
+    {
+      "name": "build",
+      "conclusion": "success",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42465302650/job/128683324595"
+    },
+    {
+      "name": "windows-storage",
+      "conclusion": "success",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42465302650/job/128683324673"
+    },
+    {
+      "name": "release",
+      "conclusion": "success",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/42465302650/job/128683570656"
+    }
+  ],
+  "tests": {
+    "ftb-quests": 89,
+    "ftb-library": 13,
+    "ftb-utilities": 0,
+    "server-compat": 2
+  },
+  "assets": {
+    "BUILD-INFO.json": {
+      "sha256": "2c436d6fdfe005ecfbc3b4a8b29b95bcbb210d46c27faea412f8f10ef1f63513",
+      "size": 214419,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/BUILD-INFO.json"
+    },
+    "Cleanroom-0.4.0-Server-Compatibility-1.0.0-sources.jar": {
+      "sha256": "3fc03b55dc2e65d881fae2853e60d9df42d4306dadb39f0496e3c7fa24ea4f05",
+      "size": 2478,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/Cleanroom-0.4.0-Server-Compatibility-1.0.0-sources.jar"
+    },
+    "Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar": {
+      "sha256": "ab21b0b5940e83190cf84a9eb7f266332b7358e1942968b1213fe32260660bbb",
+      "size": 4776,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar"
+    },
+    "FTB-Library-NovaEng-5.5.4-modern.7-sources.jar": {
+      "sha256": "88dcde02b5d4366ba7bcd2ae995caad6cdad93dd3d6292459cfbff9130093dbb",
+      "size": 459077,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/FTB-Library-NovaEng-5.5.4-modern.7-sources.jar"
+    },
+    "FTB-Library-NovaEng-5.5.4-modern.7.jar": {
+      "sha256": "4a241f1835739087b47b1d1790b126f4790fa22ad339b833a3baeb575c9b1c45",
+      "size": 953224,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/FTB-Library-NovaEng-5.5.4-modern.7.jar"
+    },
+    "FTB-Utilities-NovaEng-5.5.1-modern.2-sources.jar": {
+      "sha256": "5958ca6e3ff2969becc628c2bb475593e2d42fbf969f259ccf5220608b258fb0",
+      "size": 193223,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/FTB-Utilities-NovaEng-5.5.1-modern.2-sources.jar"
+    },
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": {
+      "sha256": "91781f18755cfdaa0972fdda74a3eff43eae4f9cdd56f6def11d35b1eaec0155",
+      "size": 424408,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/FTB-Utilities-NovaEng-5.5.1-modern.2.jar"
+    },
+    "FTBQuests-1202.10.0-modern.19-sources.jar": {
+      "sha256": "50c655b55c1c26d606cdc27e5af55071c675c69f7768c5fd06cc96ef3e1a9603",
+      "size": 816932,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/FTBQuests-1202.10.0-modern.19-sources.jar"
+    },
+    "FTBQuests-1202.10.0-modern.19.jar": {
+      "sha256": "c0d7a3b6a3e6ab9845809999f742f5bfad5d2b63d42b63e0727abe19c66f112f",
+      "size": 1521341,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/FTBQuests-1202.10.0-modern.19.jar"
+    },
+    "RELEASE-NOTES.md": {
+      "sha256": "d3168c754f579160c1dc629f9fdc284298df0cfad52919d16dc1499edac77e70",
+      "size": 1558,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/RELEASE-NOTES.md"
+    },
+    "SHA256SUMS": {
+      "sha256": "0b21274e076daef382ddb0e22b6b2753644d6782969cee27bf49a8fa248f73e8",
+      "size": 1047,
+      "url": "https://github.com/mcyudream/ftb-quests-legacy/releases/download/v1202.10.0-modern.19/SHA256SUMS"
+    }
+  },
+  "download_verification": "All release assets downloaded and verified against tag CI; all four production JARs identical to runtime-accepted source CI files",
+  "runtime_cases": [
+    "ftb-nova-ime19-ci-r1-040/client",
+    "ftb-nova-ime19-ci-server-r1-040/server"
+  ],
+  "native_ime_engine_keystrokes_not_automated": true
+}

@@ -54,8 +54,8 @@ CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁�
 
 ## 验证范围
 
-modern.19 已在正式 Cleanroom 0.4.0（非 userdev）客户端／专服通过章节右键编辑、平台输入法焦点通知、中文保存与未知字段保留回归。Quests 89 项、Library 13 项、专服补丁 2 项单元测试通过。Windows CI 使用真实 Win32 窗口与正式 CR 0.4.0 处理器检查 IME 上下文关联／解除／重新启用；详见 [modern.19 验收](verification/modern19/README.md)。[modern.18 输入回归](verification/modern18/README.md) 与 [modern.17 发行记录](verification/modern17/README.md) 保留供查阅。
+modern.19 已在正式 Cleanroom 0.4.0（非 userdev）客户端／专服通过章节右键编辑、平台输入法焦点通知、中文保存与未知字段保留回归。Quests 89 项、Library 13 项、专服补丁 2 项单元测试通过。Windows CI 使用真实 Win32 窗口与正式 CR 0.4.0 处理器检查 IME 上下文关联／解除／重新启用。正式版的 11 个下载资产已全部校验，生产 JAR 与实际验收文件一致；详见 [modern.19 验收](verification/modern19/README.md) 和 [发布文件校验](verification/modern19/published.json)。[modern.18 输入回归](verification/modern18/README.md) 与 [modern.17 发行记录](verification/modern17/README.md) 保留供查阅。
 
 modern.16 历史记录保留在 [原本地版报告](verification/local-modern16/REPORT.md) 和 [原公开构建验收](verification/release/README.md)。
 
-独立系统编辑窗口已移除，中文按游戏键盘字符队列送入原输入框并验证保存；**系统输入法引擎的真实候选词按键流程未自动化实测**。Linux x86_64 已验证，Windows/macOS 和完整整合包未实测。拼音采用当前显示名及 ICU 的读音，未枚举所有多音字别名。详见使用说明。
+独立系统编辑窗口已移除，中文按游戏键盘字符队列送入原输入框并验证保存；**系统输入法引擎的真实候选词按键流程未自动化实测**。Linux x86_64 游戏回归和 Windows 原生文件锁／IME 上下文检查已验证；Windows/macOS 完整游戏输入法及完整整合包未实测。拼音采用当前显示名及 ICU 的读音，未枚举所有多音字别名。详见使用说明。
