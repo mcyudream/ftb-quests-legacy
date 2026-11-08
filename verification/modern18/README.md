@@ -1,5 +1,7 @@
 # modern.18 输入回归记录
 
+[modern.18 正式版下载](https://github.com/mcyudream/ftb-quests-legacy/releases/tag/v1202.10.0-modern.18) · [发布文件校验](published.json) · [标签 CI 的 Windows 检查输出](windows-storage.txt)
+
 ## 已复现和修复
 
 旧版 modern.17 / Library modern.5 的真实打包 JAR 在正式 Cleanroom 0.4.0 上复现：上一帧鼠标位于标题，下一次点击正文第二行时，光标停在第一行末尾（位置 6），实际应为第二行开头（位置 7）。`GuiWrapper` 只更新悬停标记，光标定位却读取旧坐标。证据见 [旧版失败结果](baseline/result.json)。

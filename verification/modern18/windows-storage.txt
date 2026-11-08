@@ -1,0 +1,4 @@
+PASS: reproduced AccessDenied directory rename while another process uses normal
+PASS: save under a native directory lock and unchanged NOSHARE_DELETE/NOSHARE_WRITE addon file
+PASS: native edited-file lock rolls back prior changes, preserves snapshot, then retries successfully
+WINDOWS_STORAGE_PASS
