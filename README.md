@@ -56,6 +56,8 @@ CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁�
 
 ## 验证范围
 
+modern.21 的有／无 Ponder 客户端和专服四组合使用下载的 CI 安装 JAR 在正式 CR 0.4.0 上复验通过。106 项 Quests／Library／专服补丁单元测试通过；主分支与标签 CI 的构建、Windows 文件锁、Windows IME 检查均通过。正式版 11 个资产已全部下载校验，生产包与运行验收的 CI 文件一致。详见 [modern.21 验收](verification/modern21/README.md) 和 [发布文件校验](verification/modern21/published.json)。
+
 modern.20 在 40919 个物品变体的正式 CR 0.4.0 客户端完成中文、拼音、注册名、模组过滤及快速改词回归；准备后搜索显示时间约 98–101 毫秒（本机受控用例）。背包选取保留数量及 NBT，modern.19 的输入法／章节回归和专服保存重读也通过；单元测试共 106 项。11 个正式版资产已全部下载校验，生产 JAR 与实际游戏验收文件一致。详见 [modern.20 验收与对比](verification/modern20/README.md) 和 [发布文件校验](verification/modern20/published.json)。
 
 modern.19 已在正式 Cleanroom 0.4.0（非 userdev）客户端／专服通过章节右键编辑、平台输入法焦点通知、中文保存与未知字段保留回归。Quests 89 项、Library 13 项、专服补丁 2 项单元测试通过。Windows CI 使用真实 Win32 窗口与正式 CR 0.4.0 处理器检查 IME 上下文关联／解除／重新启用。正式版的 11 个下载资产已全部校验，生产 JAR 与实际验收文件一致；详见 [modern.19 验收](verification/modern19/README.md) 和 [发布文件校验](verification/modern19/published.json)。[modern.18 输入回归](verification/modern18/README.md) 与 [modern.17 发行记录](verification/modern17/README.md) 保留供查阅。

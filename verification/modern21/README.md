@@ -20,3 +20,7 @@ Quests 89 项、Library 15 项、专服补丁 2 项单元测试通过。任务�
 主分支流水线 `44706952979` 的构建、Windows 文件锁、Windows IME 检查通过。下载产物逐个校验后，使用其原始安装 JAR 在正式 CR 0.4.0 上完成有／无 Ponder 的客户端和专服四组合复验，全部通过；联合客户端 27 项、无 Ponder 客户端 15 项检查通过。生产 Quests SHA-256：`a2d92a0e3e52f5193daf8a9d1ab8c5c06b1c1e5b3e7b27a1d8dedcd0ffba4a66`。
 
 CI 与本地构建仅五个匿名 TileEntity class 字节不同，忽略常量池索引后声明和指令一致；231 个任务模型／网络／保存工具 class 字节一致。最终兼容结论依据下载的 CI 安装 JAR 的实际四组合运行结果，详见 [main-ci.json](main-ci.json)。
+
+## 正式发行
+
+`v1202.10.0-modern.21` 已发布为非预览 Latest。标签流水线 `44710519792` 的构建、Windows 文件锁、Windows IME 和发布任务全部通过；11 个发布资产全部下载并核对 SHA256SUMS、GitHub 资产摘要和标签 CI 产物。四个生产 JAR 与前述实际运行验收的主分支 CI 文件一致。详见 [published.json](published.json)。
