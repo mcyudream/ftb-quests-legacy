@@ -1,0 +1,17 @@
+{
+  "cleanroom": "0.4.0",
+  "side": "client",
+  "exit": 0,
+  "loader_version_seen": true,
+  "server_ready": false,
+  "timed_out": false,
+  "gameplay_report": {
+    "result": "PASS",
+    "cleanroom": "0.4.0",
+    "detail": "Chat Enter command dispatch; chapter titles through parent ticks in browsing, editing and disabled animation",
+    "video": false,
+    "ponder": false,
+    "zs": false
+  },
+  "result": "FUNCTIONAL_PASS"
+}

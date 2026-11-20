@@ -1,0 +1,95 @@
+{
+  "repository": "mcyudream/ftb-quests-legacy",
+  "run": 44706952979,
+  "stage": "main",
+  "commit": "6d1716df017026db997625e7b43dece86d781d52",
+  "ci_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/44706952979",
+  "production_sha256": {
+    "FTB-Library-NovaEng-5.5.4-modern.8.jar": "4bb1e89ec62e3684ace3a89028aa4b480fa002f42ef691008a329a1625459ae7",
+    "FTBQuests-1202.10.0-modern.21.jar": "a2d92a0e3e52f5193daf8a9d1ab8c5c06b1c1e5b3e7b27a1d8dedcd0ffba4a66",
+    "Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar": "ab21b0b5940e83190cf84a9eb7f266332b7358e1942968b1213fe32260660bbb",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "23127cbd045d10bd2b97c92c4fec35b13e42f799ebe3f36d4435eee53ef67d3c"
+  },
+  "checksums": {
+    "BUILD-INFO.json": "8dbb993dd2be4e11cd442807e42d4140aedb65997a6474c7cf9815548bc7312e",
+    "Cleanroom-0.4.0-Server-Compatibility-1.0.0-sources.jar": "3fc03b55dc2e65d881fae2853e60d9df42d4306dadb39f0496e3c7fa24ea4f05",
+    "Cleanroom-0.4.0-Server-Compatibility-1.0.0.jar": "ab21b0b5940e83190cf84a9eb7f266332b7358e1942968b1213fe32260660bbb",
+    "FTB-Library-NovaEng-5.5.4-modern.8-sources.jar": "0726f256bed48f1a608b504fc563a2663687a057bf01acd843183d38d00d68aa",
+    "FTB-Library-NovaEng-5.5.4-modern.8.jar": "4bb1e89ec62e3684ace3a89028aa4b480fa002f42ef691008a329a1625459ae7",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2-sources.jar": "5958ca6e3ff2969becc628c2bb475593e2d42fbf969f259ccf5220608b258fb0",
+    "FTB-Utilities-NovaEng-5.5.1-modern.2.jar": "23127cbd045d10bd2b97c92c4fec35b13e42f799ebe3f36d4435eee53ef67d3c",
+    "FTBQuests-1202.10.0-modern.21-sources.jar": "feddd9c6933595db72f2fe09087318366548e856755ecf56f7b9021ba1ea069e",
+    "FTBQuests-1202.10.0-modern.21.jar": "a2d92a0e3e52f5193daf8a9d1ab8c5c06b1c1e5b3e7b27a1d8dedcd0ffba4a66",
+    "RELEASE-NOTES.md": "8b65adb8ecf09c32f470543063c81a5498258d1a74a5eb630d8738e1386bc27d"
+  },
+  "production_differences_from_local_acceptance": {
+    "FTBQuests-1202.10.0-modern.21.jar": {
+      "runtime": "4f44cd33fe4255fba7141df5ba5e7b9a1b47bb15927e3a727994d9cc5f5693e0",
+      "ci": "a2d92a0e3e52f5193daf8a9d1ab8c5c06b1c1e5b3e7b27a1d8dedcd0ffba4a66"
+    }
+  },
+  "tests": {
+    "ftb-quests": 89,
+    "ftb-library": 15,
+    "ftb-utilities": 0,
+    "server-compat": 2
+  },
+  "jobs": [
+    {
+      "name": "build",
+      "conclusion": "success",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/44706952979/job/136188842994"
+    },
+    {
+      "name": "windows-ime",
+      "conclusion": "success",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/44706952979/job/136188843290"
+    },
+    {
+      "name": "windows-storage",
+      "conclusion": "success",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/44706952979/job/136188843550"
+    },
+    {
+      "name": "release",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/mcyudream/ftb-quests-legacy/actions/runs/44706952979/job/136190250949"
+    }
+  ],
+  "runtime_cases": [
+    {
+      "name": "combined-client",
+      "result": "FUNCTIONAL_PASS",
+      "source_scenario": "gui-release-ci-combined-client-20261120-r1/client",
+      "checks": 27,
+      "runtime": "ci/combined-client/runtime-summary.json",
+      "report": "ci/combined-client/result.json"
+    },
+    {
+      "name": "without-ponder-client",
+      "result": "FUNCTIONAL_PASS",
+      "source_scenario": "gui-release-ci-no-ponder-client-20261120-r1/client",
+      "checks": 15,
+      "runtime": "ci/without-ponder-client/runtime-summary.json",
+      "report": "ci/without-ponder-client/result.json"
+    },
+    {
+      "name": "combined-server",
+      "result": "FUNCTIONAL_PASS",
+      "source_scenario": "gui-release-ci-combined-server-20261120-r1/server",
+      "checks": null,
+      "runtime": "ci/combined-server/runtime-summary.json",
+      "report": "ci/combined-server/result.json"
+    },
+    {
+      "name": "without-ponder-server",
+      "result": "FUNCTIONAL_PASS",
+      "source_scenario": "gui-release-ci-no-ponder-server-20261120-r1/server",
+      "checks": null,
+      "runtime": "ci/without-ponder-server/runtime-summary.json",
+      "report": "ci/without-ponder-server/result.json"
+    }
+  ],
+  "ci_artifacts_used_for_gameplay": true,
+  "local_vs_ci_delta": "Five anonymous tile classes have identical javap declarations/instructions after ignoring constant-pool indices. All 231 quest-model/network/utility class bytes match the local accepted build. CI installation jars were independently tested in all four combinations."
+}
