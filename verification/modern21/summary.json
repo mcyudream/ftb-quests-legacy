@@ -1,0 +1,64 @@
+{
+  "version": "1202.10.0-modern.21",
+  "date": "2026-11-20",
+  "publication": "candidate; final CI and publication recorded separately",
+  "minecraft": "1.12.2",
+  "cleanroom": "0.4.0",
+  "java": 25,
+  "platform": "Linux x86_64 / llvmpipe",
+  "production_jar": "FTBQuests-1202.10.0-modern.21.jar",
+  "jar_sha256": "4f44cd33fe4255fba7141df5ba5e7b9a1b47bb15927e3a727994d9cc5f5693e0",
+  "unit_tests": 106,
+  "module_tests": {
+    "ftb-quests": 89,
+    "ftb-library": 15,
+    "server-compat": 2
+  },
+  "cases": [
+    {
+      "name": "old-version-reproduction",
+      "expected_result": "FAIL",
+      "actual_result": "FAIL",
+      "checks": 27,
+      "report": "cases/old-version-reproduction/result.json",
+      "runtime": "cases/old-version-reproduction/runtime-summary.json"
+    },
+    {
+      "name": "combined-client",
+      "expected_result": "FUNCTIONAL_PASS",
+      "actual_result": "FUNCTIONAL_PASS",
+      "checks": 27,
+      "report": "cases/combined-client/result.json",
+      "runtime": "cases/combined-client/runtime-summary.json"
+    },
+    {
+      "name": "without-ponder-client",
+      "expected_result": "FUNCTIONAL_PASS",
+      "actual_result": "FUNCTIONAL_PASS",
+      "checks": 15,
+      "report": "cases/without-ponder-client/result.json",
+      "runtime": "cases/without-ponder-client/runtime-summary.json"
+    },
+    {
+      "name": "combined-server",
+      "expected_result": "FUNCTIONAL_PASS",
+      "actual_result": "FUNCTIONAL_PASS",
+      "checks": null,
+      "report": "cases/combined-server/result.json",
+      "runtime": "cases/combined-server/runtime-summary.json"
+    },
+    {
+      "name": "without-ponder-server",
+      "expected_result": "FUNCTIONAL_PASS",
+      "actual_result": "FUNCTIONAL_PASS",
+      "checks": null,
+      "report": "cases/without-ponder-server/result.json",
+      "runtime": "cases/without-ponder-server/runtime-summary.json"
+    }
+  ],
+  "limits": [
+    "Full user modpack, Windows/macOS game runtime and other GPUs were not tested.",
+    "Only the old-version reproduction is expected to fail.",
+    "Intermediate launcher and harness failures remain in the local workspace; delivery cases reference the completed regression scenarios."
+  ]
+}

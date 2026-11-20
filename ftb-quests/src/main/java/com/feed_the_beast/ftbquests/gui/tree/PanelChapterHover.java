@@ -33,11 +33,14 @@ public class PanelChapterHover extends Panel
 		setOnlyInteractWithWidgetsInside(true);
 	}
 
-	@Override public boolean isEnabled() { return chapter != null && !closing; }
 	private double slide() { return PanelTransition.supported() ? -6 * (1 - progress) : 0; }
 	@Override public int getMouseX() { return (int)Math.floor(super.getMouseX() - slide()); }
 	@Override public void updateMouseOver(int mouseX, int mouseY)
-	{ super.updateMouseOver(isEnabled() ? (int)Math.floor(mouseX - slide()) : Integer.MIN_VALUE / 2, isEnabled() ? mouseY : Integer.MIN_VALUE / 2); }
+	{
+		boolean interactive = chapter != null && !closing;
+		super.updateMouseOver(interactive ? (int)Math.floor(mouseX - slide()) : Integer.MIN_VALUE / 2,
+			interactive ? mouseY : Integer.MIN_VALUE / 2);
+	}
 
 	@Override
 	public void addWidgets()

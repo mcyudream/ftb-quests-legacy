@@ -20,7 +20,8 @@ public final class AcceptanceMod
     {
         if (event.getSide().isClient())
         {
-            if (Boolean.getBoolean("ftbquests.acceptance.search")) AcceptanceItemSearch.install();
+            if (Boolean.getBoolean("ftbquests.acceptance.guis")) AcceptanceGuiEntryPoints.install();
+            else if (Boolean.getBoolean("ftbquests.acceptance.search")) AcceptanceItemSearch.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.focus")) AcceptanceEditorFocus.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.input")) AcceptanceInput.install();
             else if (Boolean.getBoolean("ftbquests.acceptance.animation")) AcceptanceAnimation.install();
