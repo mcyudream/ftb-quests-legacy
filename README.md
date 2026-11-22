@@ -58,7 +58,7 @@ CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁�
 
 ## 验证范围
 
-modern.22 的主分支 CI 构建、Windows 文件锁与 Windows IME 检查通过，共 106 项单元测试。下载 CI 安装 JAR 后，在正式 CR 0.4.0 上复验有／无 Ponder 的客户端和专服四组合，全部通过；生产归档相对 modern.21 只改变版本信息与思索按钮所在的匿名 class。详见 [modern.22 验收](verification/modern22/README.md)。
+modern.22 的主分支与正式标签 CI 构建、Windows 文件锁与 Windows IME 检查通过，共 106 项单元测试。下载 CI 安装 JAR 后，在正式 CR 0.4.0 上复验有／无 Ponder 的客户端和专服四组合，全部通过；生产归档相对 modern.21 只改变版本信息与思索按钮所在的匿名 class。非预览 Latest 的 11 个发布资产已全部下载校验，四个生产 JAR 与运行验收文件一致。详见 [modern.22 验收](verification/modern22/README.md) 和 [发布文件校验](verification/modern22/published.json)。
 
 modern.21 的有／无 Ponder 客户端和专服四组合使用下载的 CI 安装 JAR 在正式 CR 0.4.0 上复验通过。106 项 Quests／Library／专服补丁单元测试通过；主分支与标签 CI 的构建、Windows 文件锁、Windows IME 检查均通过。正式版 11 个资产已全部下载校验，生产包与运行验收的 CI 文件一致。详见 [modern.21 验收](verification/modern21/README.md) 和 [发布文件校验](verification/modern21/published.json)。
 

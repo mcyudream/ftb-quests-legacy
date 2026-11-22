@@ -22,3 +22,7 @@ Quests 89 项现有单元测试通过。本地 JAR 摘要、报告与相对 mode
 下载并校验 CI 安装包后，在正式 CR 0.4.0 上完成有／无 Ponder 的客户端与专服四组合复验，全部通过。安装 Ponder 的客户端 27 项检查、未安装 Ponder 的客户端 15 项检查通过；专服完成启动与任务定义保存重读。生产 Quests SHA-256：`3d6cd79380556a19b9ff53be8553a19793e754b5557ff68c996420370876e2b1`。详见 [main-ci.json](main-ci.json)。
 
 与 modern.21 公开 JAR 比较，只有版本信息和 `DescriptionComponents$6.class` 改变，其余归档条目逐字节相同。记录见 [ci-archive-delta.json](ci-archive-delta.json)。
+
+## 正式发行
+
+`v1202.10.0-modern.22` 已发布为非预览 Latest。标签流水线 `45035845175` 的构建、Windows 文件锁、Windows IME 和发布任务全部通过；11 个发布资产全部下载并核对 SHA256SUMS、GitHub 资产摘要和标签 CI 文件。四个生产 JAR 与前述实际运行验收的主分支 CI 文件一致。详见 [published.json](published.json)。
