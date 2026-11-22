@@ -1,0 +1,12 @@
+{
+  "baseline_jar": "FTBQuests-1202.10.0-modern.21.jar",
+  "baseline_sha256": "a2d92a0e3e52f5193daf8a9d1ab8c5c06b1c1e5b3e7b27a1d8dedcd0ffba4a66",
+  "candidate_jar": "FTBQuests-1202.10.0-modern.22.jar",
+  "candidate_sha256": "3d6cd79380556a19b9ff53be8553a19793e754b5557ff68c996420370876e2b1",
+  "changed_entries": [
+    "com/feed_the_beast/ftbquests/FTBQuests.class",
+    "com/feed_the_beast/ftbquests/Tags.class",
+    "com/feed_the_beast/ftbquests/client/DescriptionComponents$6.class",
+    "mcmod.info"
+  ]
+}

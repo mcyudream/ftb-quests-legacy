@@ -58,6 +58,8 @@ CI 在 main、PR、手动运行时构建三个 FTB 模块及独立专服补丁�
 
 ## 验证范围
 
+modern.22 的主分支 CI 构建、Windows 文件锁与 Windows IME 检查通过，共 106 项单元测试。下载 CI 安装 JAR 后，在正式 CR 0.4.0 上复验有／无 Ponder 的客户端和专服四组合，全部通过；生产归档相对 modern.21 只改变版本信息与思索按钮所在的匿名 class。详见 [modern.22 验收](verification/modern22/README.md)。
+
 modern.21 的有／无 Ponder 客户端和专服四组合使用下载的 CI 安装 JAR 在正式 CR 0.4.0 上复验通过。106 项 Quests／Library／专服补丁单元测试通过；主分支与标签 CI 的构建、Windows 文件锁、Windows IME 检查均通过。正式版 11 个资产已全部下载校验，生产包与运行验收的 CI 文件一致。详见 [modern.21 验收](verification/modern21/README.md) 和 [发布文件校验](verification/modern21/published.json)。
 
 modern.20 在 40919 个物品变体的正式 CR 0.4.0 客户端完成中文、拼音、注册名、模组过滤及快速改词回归；准备后搜索显示时间约 98–101 毫秒（本机受控用例）。背包选取保留数量及 NBT，modern.19 的输入法／章节回归和专服保存重读也通过；单元测试共 106 项。11 个正式版资产已全部下载校验，生产 JAR 与实际游戏验收文件一致。详见 [modern.20 验收与对比](verification/modern20/README.md) 和 [发布文件校验](verification/modern20/published.json)。

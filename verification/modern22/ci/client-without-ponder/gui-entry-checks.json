@@ -1,0 +1,17 @@
+{
+  "mode_0_parent_tick_opens_chapter": true,
+  "mode_0_parent_title_visible": true,
+  "mode_0_child_title_visible": true,
+  "mode_0_child_title_selects_chapter": true,
+  "mode_0_chapter_closes_after_leaving": true,
+  "mode_1_parent_tick_opens_chapter": true,
+  "mode_1_parent_title_visible": true,
+  "mode_1_child_title_visible": true,
+  "mode_1_child_title_selects_chapter": true,
+  "mode_1_chapter_closes_after_leaving": true,
+  "mode_2_parent_tick_opens_chapter": true,
+  "mode_2_parent_title_visible": true,
+  "mode_2_child_title_visible": true,
+  "mode_2_child_title_selects_chapter": true,
+  "mode_2_chapter_closes_after_leaving": true
+}
