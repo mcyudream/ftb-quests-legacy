@@ -14,12 +14,12 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 
 | 文件 | 版本 |
 | --- | --- |
-| FTB Quests | `FTBQuests-1202.10.0-modern.21.jar` |
+| FTB Quests | `FTBQuests-1202.10.0-modern.22.jar` |
 | FTB Library | `FTB-Library-NovaEng-5.5.4-modern.8.jar` |
 | FTB Utilities（原整合包使用时保留） | `FTB-Utilities-NovaEng-5.5.1-modern.2.jar` |
 | ItemFilters（必装，另从原发布页下载） | `1.0.4.2` |
 
-从 modern.20 更新此修复时只需替换 Quests；已有 Library modern.8、Utilities modern.2 和 ItemFilters 可继续使用。
+从 modern.21 更新此修复时只需替换 Quests；已有 Library modern.8、Utilities modern.2 和 ItemFilters 可继续使用。
 
 只有 `-sources.jar` 后缀的文件为源码，不放进 mods。此仓库的 `media-api` / `mcp-server` 项目是编译接口，不能装进游戏。
 
@@ -28,6 +28,8 @@ Minecraft **1.12.2** · **Cleanroom 0.4.0 正式版（无 alpha）** · **Java 2
 Ponder、CraftTweaker／ZenScript、Media API 与 Minecraft MCP Server 保持可选，分别安装对应运行 Mod；[Ponder Legacy](https://github.com/mcyudream/ponder-legacy/releases) 无需随任务系统重复捆绑。公开发行的三个 FTB JAR 不内嵌媒体运行库，已有 Media API 的视频接入继续保留。
 
 ## 本版要点
+
+**Quests modern.22**：隐藏正文思索按钮悬停提示中自动附加的物品／教程 ID，保留“查看思索演示”或自定义提示。见 [修复说明](docs/releases/1202.10.0-modern.22.md)。
 
 **Quests modern.21**：修复章节浮层关闭时停止 tick，导致侧栏悬停无法显示章节名称的问题。父章节、子章节及点击选择恢复，编辑模式和关闭动画时同样生效。Library 仍为 modern.8，见 [修复说明](docs/releases/1202.10.0-modern.21.md) 和 [本版验收](verification/modern21/README.md)。
 

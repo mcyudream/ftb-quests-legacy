@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-22",
+  "version": "1202.10.0-modern.22",
+  "publication": "local build; not published",
+  "cleanroom": "0.4.0",
+  "java": 25,
+  "platform": "Linux x86_64 / llvmpipe",
+  "production_jar": "FTBQuests-1202.10.0-modern.22.jar",
+  "sha256": "225738f76154a1dda707e2bea40a85f8e2a9c91009dcbc7908247d1be6c52b1a",
+  "tests": {
+    "tests": 89,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "cases": [
+    {
+      "case": "client-with-ponder",
+      "result": "FUNCTIONAL_PASS",
+      "detail": "Chat Enter command dispatch; chapter titles through parent ticks in browsing, editing and disabled animation"
+    },
+    {
+      "case": "client-without-ponder",
+      "result": "FUNCTIONAL_PASS",
+      "detail": "Chat Enter command dispatch; chapter titles through parent ticks in browsing, editing and disabled animation"
+    },
+    {
+      "case": "server-with-ponder",
+      "result": "FUNCTIONAL_PASS",
+      "detail": "server definition round trip"
+    },
+    {
+      "case": "server-without-ponder",
+      "result": "FUNCTIONAL_PASS",
+      "detail": "server definition round trip"
+    }
+  ],
+  "changed_jar_entries_from_modern21": [
+    "com/feed_the_beast/ftbquests/FTBQuests.class",
+    "com/feed_the_beast/ftbquests/Tags.class",
+    "com/feed_the_beast/ftbquests/client/DescriptionComponents$6.class",
+    "mcmod.info"
+  ],
+  "limits": [
+    "Runtime checks cover existing GUI interactions, definition save/reload, and client/server startup with and without Ponder.",
+    "The tooltip removal was checked in source and packaged bytecode; no in-game tooltip screenshot or Ponder scene playback was captured for this build."
+  ]
+}

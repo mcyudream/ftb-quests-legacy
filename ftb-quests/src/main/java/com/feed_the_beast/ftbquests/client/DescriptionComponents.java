@@ -161,7 +161,7 @@ public final class DescriptionComponents
                 {
                     {setSize(componentWidth,24);}
                     @Override public void onClicked(MouseButton button){if(button.isLeft()){GuiHelper.playClickSound();handleClick("ponder",value);}}
-                    @Override public void addMouseOverText(List<String> tooltip){super.addMouseOverText(tooltip);tooltip.add(json.has("hover")?string(json,"hover",""):PonderLink.tr("open"));tooltip.add(value);}
+                    @Override public void addMouseOverText(List<String> tooltip){super.addMouseOverText(tooltip);tooltip.add(json.has("hover")?string(json,"hover",""):PonderLink.tr("open"));}
                 });break;
             }
             default:
